@@ -1907,7 +1907,7 @@ LIMIT 50");
             $NnM = 0;
             $a = 1;
             $read = new Read();
-            $read->ExeRead("cv_product", "WHERE id_db_settings=:i AND ILoja!=:ss ORDER BY product ASC LIMIT 50", "i={$id_db_settings}&ss={$a}");
+            $read->ExeRead("cv_product", "WHERE id_db_settings=:i AND ILoja!=:ss ORDER BY product ASC LIMIT 30", "i={$id_db_settings}&ss={$a}");
 
             if($read->getResult()):
                 foreach($read->getResult() as $key):
@@ -1949,21 +1949,22 @@ LIMIT 50");
                             $alertY = "bg-success";
                         endif;
                         ?>
-                        <tr>
-                            <td style="max-width: 10%!important;font-size: 10pt!important;"><span class="badge <?= $alertY; ?> me-1"></span></td>
-                            <td style="max-width: 30%!important;font-size: 10pt!important;"><?=  $key['codigo']; ?></td>
+                        <tr style="border-bottom: 1px solid #000!important;">
+                            <td hidden="hidden"><span class="badge <?= $alertY; ?> me-1"></span></td>
+                            <td hidden="hidden"><?=  $key['codigo']; ?></td>
                             <td style="max-width: 30%!important;font-size: 10pt!important;"><?=  $key['product']; ?></td>
-                            <td style="max-width: 30%!important;font-size: 10pt!important;">
+                            <td hidden="hidden">
                                 <input type="hidden" id="codigo_barras_<?= $key['id']; ?>" disabled value="<?= $key['codigo_barras']; ?>"><?=  $key['codigo_barras']; ?>
                             </td>
                             <td style="max-width: 10%!important;">
-                                <input style="width: 100%!important;" type="number" id="desconto_<?= $key['id']; ?>" class="form-kwanzar" min="0" max="100000000000000000000000" value="<?= $Emanuel; ?>" placeholder="Desconto">
+                                <input style="width: 60%!important;" type="number" id="desconto_<?= $key['id']; ?>" class="form-kwanzar" min="0" max="100000000000000000000000" value="<?= $Emanuel; ?>" placeholder="Desconto">
                             </td>
                             <td style="max-width: 10%!important;">
                                 <input style="width: 100%!important;" type="hidden" id="taxa_<?= $key['id']; ?>" class="form-kwanzar" disabled value="<?= $key['id_iva']; ?>" placeholder="Taxa de imposto"><?= $key['iva']; ?>
                             </td>
                             <td style="max-width: 20%!important;">
-                                <input style="width: 100%!important;" type="text" class="form-kwanzar" id="preco_<?= $key['id']; ?>" disabled value="<?= $preco; ?>">
+                                <?= number_format($preco, 2, ",", ".")?>
+                                <input hidden="hidden" type="text" class="form-kwanzar" id="preco_<?= $key['id']; ?>" disabled value="<?= $preco; ?>">
                             </td>
                             <td style="max-width: 10%!important;">
                                 <input style="width: 100%!important;" type="number" class="form-kwanzar" id="quantidade_<?= $key['id']; ?>" min="1" value="1"><br/>
@@ -1975,10 +1976,10 @@ LIMIT 50");
                             <td style="max-width: 1%!important;">
                                 <input type="hidden" value="<?= $id_db_settings; ?>" id="id_db_settings_<?= $key['id']; ?>">
                             </td>
-                            <td style="max-width: 10%!important;">
+                            <td  hidden="hidden">
                                 <span><?= $key['local_product']; ?></span>
                             </td>
-                            <td style="max-width: 10%!important;">
+                            <td  hidden="hidden">
                                 <span><?= $key['remarks']; ?></span>
                             </td>
                             <td style="max-width: 15%!important;">

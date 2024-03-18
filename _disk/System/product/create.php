@@ -75,7 +75,7 @@ endif;
                         ?>
                     </div>
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="col-lg-6">
                             <div class="mb-3">
                                 <label class="form-label">Descrição</label>
                                 <input type="text" name = "product" id="product" value="<?php if (!empty($ClienteData['product'])) echo $ClienteData['product']; ?>" class="form-control"  placeholder="Descrição"/>
@@ -84,8 +84,92 @@ endif;
 
                         <div class="col-lg-3">
                             <div class="mb-3">
+                                <label class="form-label">Categoria</label>
+                                <select name="id_category" id="id_category" onchange="CategorySelect();"  class="form-control">
+                                    <option value = "">-- Selecione a categoria --</option>
+                                    <?php
+                                    $nA = "Activo";
+                                    $read->ExeRead("cv_category", "WHERE id_db_settings=:id ORDER BY category_title ASC", "id={$id_db_settings}");
+
+                                    if($read->getResult()):
+                                        foreach ($read->getResult() as $key):
+                                            extract($key);
+
+                                            ?>
+                                            <option value = "<?= $key['id_xxx']; ?>" <?php if (isset($ClienteData['id_category']) && $ClienteData['id_category'] == $key['id_xxx']) echo 'selected="selected"'; ?>><?= $key['category_title']; ?></option>
+                                        <?php
+                                        endforeach;
+                                    endif;
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="mb-3">
+                                <label class="form-label">Tipo de item</label>
+                                <select name="type" id="type" class="form-control">
+                                    <option value = "P" <?php if (isset($ClienteData['type']) && $ClienteData['type'] == "P") echo 'selected="selected"'; ?>>Produto</option>
+                                    <option value = "S" <?php if (isset($ClienteData['type']) && $ClienteData['type'] == "S") echo 'selected="selected"'; ?>>Serviço</option>
+                                    <option value = "O" <?php if (isset($ClienteData['type']) && $ClienteData['type'] == "O") echo 'selected="selected"'; ?>>Outros (portes, adiantamentos, etc)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3" >
+                            <div class="mb-3">
+                                <label class="form-label">Custo de compra</label>
+                                <input type="text" id="custo_compra" value="<?php if (!empty($ClienteData['custo_compra'])) echo $ClienteData['custo_compra']; ?>" name="custo_compra" class="form-control" placeholder="Custo de compra"/>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="mb-3">
+                                <label class="form-label">Percentagem %</label>
+                                <input type="text" id="PorcentagemP" name="PorcentagemP" value="<?php if (!empty($ClienteData['PorcentagemP'])) echo $ClienteData['PorcentagemP']; ?>" class="form-control" placeholder="Porcentagem"/>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="mb-3">
+                                <label class="form-label">Preço</label>
+                                <input type="text" name = "preco_venda" id="preco_venda" value="<?php if (!empty($ClienteData['preco_venda'])) echo $ClienteData['preco_venda']; ?>" class="form-control"  placeholder="Preço de venda">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="mb-3">
+                                <label class="form-label">Desconto</label>
+                                <input type="number" name = "desconto" id="desconto" value="<?php if(!empty($ClienteData['desconto'])): echo $ClienteData['desconto']; else: echo "0"; endif; ?>" class="form-control"  placeholder="Desconto">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3" hidden="hidden">
+                            <div class="mb-3">
                                 <label class="form-label">Código/Ref.</label>
                                 <input type="text" name = "codigo" id="codigo" value="<?php echo $Code; ;?>" class="form-control"  placeholder="Código">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="mb-3">
+                                <label class="form-label">Imposto</label>
+                                <select class="form-control" name="iva" id="iva">
+                                    <?php
+                                    $read->ExeRead("db_taxtable", "WHERE id_db_settings=:id ORDER BY taxPercentage ASC, taxCode ASC", "id={$id_db_settings}");
+
+                                    if($read->getResult()):
+                                        foreach ($read->getResult() as $key):
+                                            extract($key);
+                                            ?>
+                                            <option value="<?= $key['taxPercentage'] ?>:<?= $key['taxtableEntry']; ?>" <?php if(isset($ClienteData['id_iva']) && $ClienteData['id_iva'] == $key['taxtableEntry']) echo "selected='selected'" ?>>
+                                                <?= $key['taxCode']." - ".$key['taxType']." (".$key['taxPercentage']."%) "; ?>
+                                            </option>
+                                        <?php
+                                        endforeach;
+                                    endif;
+                                    ?>
+                                </select>
                             </div>
                         </div>
 
@@ -113,58 +197,26 @@ endif;
                             </div>
                         </div>
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-3" hidden="hidden">
                             <div class="mb-3">
                                 <label class="form-label">Código de Barras</label>
                                 <input type="text" name = "codigo_barras" id="codigo_barras" value="<?php if (!empty($ClienteData['codigo_barras'])) echo $ClienteData['codigo_barras']; ?>" class="form-control"  placeholder="Código de Barras">
                             </div>
                         </div>
-                    </div>
-                    <div class="row" hidden>
-                        <div class="col-lg-4">
-                            <div class="mb-3">
-                                <label class="form-label">Unidade</label>
-                                <select name="unidade_medida" id="unidade_medida" class="form-control">
-                                    <option value = "Uni" <?php if (isset($ClienteData['unidade_medida']) && $ClienteData['unidade_medida'] == "Uni") echo 'selected="selected"'; ?>>Unidade</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="mb-3">
-                                <label class="form-label">Categoria</label>
-                                <select name="id_category" id="id_category" onchange="CategorySelect();"  class="form-control">
-                                    <option value = "">-- Selecione a categoria --</option>
-                                    <?php
-                                        $nA = "Activo";
-                                        $read->ExeRead("cv_category", "WHERE id_db_settings=:id ORDER BY category_title ASC", "id={$id_db_settings}");
-
-                                        if($read->getResult()):
-                                            foreach ($read->getResult() as $key):
-                                                extract($key);
-
-                                                ?>
-                                                <option value = "<?= $key['id_xxx']; ?>" <?php if (isset($ClienteData['id_category']) && $ClienteData['id_category'] == $key['id_xxx']) echo 'selected="selected"'; ?>><?= $key['category_title']; ?></option>
-                                            <?php
-                                            endforeach;
-                                        endif;
-                                    ?>
-                                </select>
+                        <div class="row" hidden>
+                            <div class="col-lg-4">
+                                <div class="mb-3">
+                                    <label class="form-label">Unidade</label>
+                                    <select name="unidade_medida" id="unidade_medida" class="form-control">
+                                        <option value = "Uni" <?php if (isset($ClienteData['unidade_medida']) && $ClienteData['unidade_medida'] == "Uni") echo 'selected="selected"'; ?>>Unidade</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-lg-3">
-                            <div class="mb-3">
-                                <label class="form-label">Tipo de item</label>
-                                <select name="type" id="type" class="form-control">
-                                    <option value = "P" <?php if (isset($ClienteData['type']) && $ClienteData['type'] == "P") echo 'selected="selected"'; ?>>Produto</option>
-                                    <option value = "S" <?php if (isset($ClienteData['type']) && $ClienteData['type'] == "S") echo 'selected="selected"'; ?>>Serviço</option>
-                                    <option value = "O" <?php if (isset($ClienteData['type']) && $ClienteData['type'] == "O") echo 'selected="selected"'; ?>>Outros (portes, adiantamentos, etc)</option>
-                                </select>
-                            </div>
-                        </div>
+
+
 
                         <div class="col-lg-3">
                             <div class="mb-3">
@@ -173,38 +225,14 @@ endif;
                             </div>
                         </div>
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-3" hidden="hidden">
                             <div class="mb-3">
                                 <label class="form-label">Remarks</label>
                                 <input type="text" name = "remarks" id="remarks" value="<?php if(!empty($ClienteData['remarks'])): echo $ClienteData['remarks']; endif; ?>" class="form-control"  placeholder="Remarks">
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="mb-3">
-                                <label class="form-label">Imposto</label>
-                                <select class="form-control" name="iva" id="iva">
-                                    <?php
-                                        $read->ExeRead("db_taxtable", "WHERE id_db_settings=:id ORDER BY taxPercentage ASC, taxCode ASC", "id={$id_db_settings}");
-
-                                        if($read->getResult()):
-                                            foreach ($read->getResult() as $key):
-                                                extract($key);
-                                                ?>
-                                                <option value="<?= $key['taxPercentage'] ?>:<?= $key['taxtableEntry']; ?>" <?php if(isset($ClienteData['id_iva']) && $ClienteData['id_iva'] == $key['taxtableEntry']) echo "selected='selected'" ?>>
-                                                    <?= $key['taxCode']." - ".$key['taxType']." (".$key['taxPercentage']."%) "; ?>
-                                                </option>
-                                            <?php
-                                            endforeach;
-                                        endif;
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3">
+                        <div class="col-lg-3" hidden="hidden">
                             <div class="mb-3">
                                 <label class="form-label">Disponível no Front</label>
                                 <select class="form-control" name="ILoja" id="ILoja">
@@ -213,7 +241,7 @@ endif;
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3" hidden="hidden">
                             <div class="mb-3">
                                 <label class="form-label">Incluír no E-Commerce</label>
                                 <select class="form-control" name="IE_commerce" id="IE_commerce">
@@ -227,31 +255,6 @@ endif;
                             <div class="mb-3">
                                 <label class="form-label">Local de Armazenamento</label>
                                 <input type="text" name = "local_product" id="local_product" value="<?php if(!empty($ClienteData['local_product'])): echo $ClienteData['local_product']; endif; ?>" class="form-control"  placeholder="Local de Armazenamento">
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <div class="mb-3">
-                                <label class="form-label">Desconto</label>
-                                <input type="number" name = "desconto" id="desconto" value="<?php if(!empty($ClienteData['desconto'])): echo $ClienteData['desconto']; else: echo "0"; endif; ?>" class="form-control"  placeholder="Desconto">
-                            </div>
-                        </div>
-                        <div class="col-lg-3" >
-                            <div class="mb-3">
-                                <label class="form-label">Custo de compra</label>
-                                <input type="text" id="custo_compra" value="<?php if (!empty($ClienteData['custo_compra'])) echo $ClienteData['custo_compra']; ?>" name="custo_compra" class="form-control" placeholder="Custo de compra"/>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="mb-3">
-                                <label class="form-label">Percentagem</label>
-                                <input type="text" id="PorcentagemP" name="PorcentagemP" value="<?php if (!empty($ClienteData['PorcentagemP'])) echo $ClienteData['PorcentagemP']; ?>" class="form-control" placeholder="Porcentagem"/>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="mb-3">
-                                <label class="form-label">Preço</label>
-                                <input type="text" name = "preco_venda" id="preco_venda" value="<?php if (!empty($ClienteData['preco_venda'])) echo $ClienteData['preco_venda']; ?>" class="form-control"  placeholder="Preço de venda">
                             </div>
                         </div>
                     </div>

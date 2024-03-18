@@ -59,9 +59,6 @@ endif;
                     <?php
                     endif;
                 endif;
-                ?>
-                <a href="panel.php?exe=POS/editar&post=<?= $key['numero']; ?><?php if($level >= 4): echo '&id_db_settings='.$id_db_settings; endif; ?>&SourceBilling=<?= $key['SourceBilling']; ?>&InvoiceType=<?= $key['InvoiceType']; ?>&dia=<?= $key['dia']; ?>&mes=<?= $key['mes']; ?>&ano=<?= $key['ano']; ?>" class="bol bol-danger bol-sm btn btn-danger btn-sm">Editar</a>
-                <?php
             endif;
             if($key['InvoiceType'] != 'PP'):
                 ?>

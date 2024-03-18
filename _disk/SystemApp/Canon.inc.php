@@ -1329,84 +1329,86 @@ if ($acao):
             </div>
             <div class="getResult"></div>
             <div class="modal-body">
-                <?php
-                if(isset($ClienteData['nif']) && !empty($ClienteData['nif']) || isset($ClienteData['nif']) && $ClienteData['nif'] != "999999999"):
+                <div class="row">
+                    <?php
+                    if(isset($ClienteData['nif']) && !empty($ClienteData['nif']) || isset($ClienteData['nif']) && $ClienteData['nif'] != "999999999"):
+                        ?>
+                        <div class="col-lg-8">
+                            <div class="col-md-12 mb-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="<?php if(isset($ClienteData['name'])) echo $ClienteData['name']; ?>" id="name" placeholder="Fornecedor"/>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    else:
+                        ?><input type="hidden" name="name" id="name" value="<?php if(isset($ClienteData['name'])) echo $ClienteData['name']; ?>"><?php
+                    endif;
+
+                    if(isset($ClienteData['nif']) && $ClienteData['nif'] == "999999999" || isset($ClienteData['nif']) && empty($ClienteData['nif']) || isset($ClienteData['nif']) && $ClienteData['nif'] == null):
+                        ?>
+                        <div class="col-lg-4">
+                            <div class="col-md-12 mb-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="<?php if(isset($ClienteData['nif'])) echo $ClienteData['nif']; ?>" id="nif" placeholder="NIF"/>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    else:
+                        ?><input type="hidden" name="nif" id="nif" value="<?php if(isset($ClienteData['nif'])) echo $ClienteData['nif']; ?>"><?php
+                    endif;
                     ?>
-                    <div class="form-row">
+                    <div class="col-lg-4">
                         <div class="col-md-12 mb-3">
                             <div class="input-group">
-                                <input type="text" class="form-control" value="<?php if(isset($ClienteData['name'])) echo $ClienteData['name']; ?>" id="name" placeholder="Fornecedor"/>
+                                <input type="text" class="form-control" value="<?php if(isset($ClienteData['email'])) echo $ClienteData['email']; ?>" id="email" placeholder="E-mail"/>
                             </div>
                         </div>
                     </div>
-                <?php
-                else:
-                    ?><input type="hidden" name="name" id="name" value="<?php if(isset($ClienteData['name'])) echo $ClienteData['name']; ?>"><?php
-                endif;
-
-                if(isset($ClienteData['nif']) && $ClienteData['nif'] == "999999999" || isset($ClienteData['nif']) && empty($ClienteData['nif']) || isset($ClienteData['nif']) && $ClienteData['nif'] == null):
-                    ?>
-                    <div class="form-row">
+                    <div class="col-lg-4">
                         <div class="col-md-12 mb-3">
                             <div class="input-group">
-                                <input type="text" class="form-control" value="<?php if(isset($ClienteData['nif'])) echo $ClienteData['nif']; ?>" id="nif" placeholder="NIF"/>
+                                <input type="text" class="form-control" value="<?php if(isset($ClienteData['telefone'])) echo $ClienteData['telefone']; ?>" id="telefone" placeholder="Telefone"/>
                             </div>
                         </div>
                     </div>
-                <?php
-                else:
-                    ?><input type="hidden" name="nif" id="nif" value="<?php if(isset($ClienteData['nif'])) echo $ClienteData['nif']; ?>"><?php
-                endif;
-                ?>
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" value="<?php if(isset($ClienteData['email'])) echo $ClienteData['email']; ?>" id="email" placeholder="E-mail"/>
+                    <div class="col-lg-4">
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="<?php if(isset($ClienteData['endereco'])) echo $ClienteData['endereco']; ?>" id="endereco" placeholder="Endereço"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" value="<?php if(isset($ClienteData['telefone'])) echo $ClienteData['telefone']; ?>" id="telefone" placeholder="Telefone"/>
+                    <div class="col-lg-4">
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="<?php if(isset($ClienteData['city'])) echo $ClienteData['city']; ?>" id="city" placeholder="Cidade"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" value="<?php if(isset($ClienteData['endereco'])) echo $ClienteData['endereco']; ?>" id="endereco" placeholder="Endereço"/>
+                    <div class="col-lg-4">
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="<?php if(isset($ClienteData['country'])) echo $ClienteData['country']; ?>" id="country" placeholder="País"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" value="<?php if(isset($ClienteData['city'])) echo $ClienteData['city']; ?>" id="city" placeholder="Cidade"/>
+                    <div class="col-lg-4">
+                        <div class="col-md-12 mb-3">
+                            <select class="form-control" id="type">
+                                <option value="">Seleciona o tipo de cliente</option>
+                                <option value="F" <?php if(isset($ClienteData['type']) && $ClienteData['type'] == "F") echo "selected";  ?>>Pessoa Física</option>
+                                <option value="J" <?php if(isset($ClienteData['type']) && $ClienteData['type'] == "J") echo "selected";  ?>>Pessoa juridica</option>
+                            </select>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" value="<?php if(isset($ClienteData['country'])) echo $ClienteData['country']; ?>" id="country" placeholder="País"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <select class="form-control" id="type">
-                            <option value="">Seleciona o tipo de cliente</option>
-                            <option value="F" <?php if(isset($ClienteData['type']) && $ClienteData['type'] == "F") echo "selected";  ?>>Pessoa Física</option>
-                            <option value="J" <?php if(isset($ClienteData['type']) && $ClienteData['type'] == "J") echo "selected";  ?>>Pessoa juridica</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <div class="input-group">
-                            <textarea class="form-control" id="obs" placeholder="Observações"><?php if(isset($ClienteData['obs'])) echo $ClienteData['obs']; ?></textarea>
+                    <div class="col-lg-12">
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <textarea class="form-control" id="obs" placeholder="Observações"><?php if(isset($ClienteData['obs'])) echo $ClienteData['obs']; ?></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1461,7 +1463,7 @@ if ($acao):
             $data['country'] = strip_tags(trim($_POST['country']));
             $data['obs'] = strip_tags(trim($_POST['obs']));
 
-            var_dump($data);
+            //var_dump($data);
 
             $DB = new Oficina();
             $DB->Fornecedores($data, $id_db_settings);
@@ -1480,68 +1482,70 @@ if ($acao):
             </div>
             <div class="getResult"></div>
             <div class="modal-body">
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" value="<?php if(isset($ClienteData['name'])) echo $ClienteData['name']; ?>" id="name" name="name" placeholder="Fornecedor"/>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="<?php if(isset($ClienteData['name'])) echo $ClienteData['name']; ?>" id="name" name="name" placeholder="Fornecedor"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" value="<?php if(isset($ClienteData['nif'])) echo $ClienteData['nif']; ?>" id="nif" placeholder="NIF"/>
+                    <div class="col-lg-4">
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="<?php if(isset($ClienteData['nif'])) echo $ClienteData['nif']; ?>" id="nif" placeholder="NIF"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" value="<?php if(isset($ClienteData['email'])) echo $ClienteData['email']; ?>" id="email" placeholder="E-mail"/>
+                    <div class="col-lg-4">
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="<?php if(isset($ClienteData['email'])) echo $ClienteData['email']; ?>" id="email" placeholder="E-mail"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" value="<?php if(isset($ClienteData['telefone'])) echo $ClienteData['telefone']; ?>" id="telefone" placeholder="Telefone"/>
+                    <div class="col-lg-4">
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="<?php if(isset($ClienteData['telefone'])) echo $ClienteData['telefone']; ?>" id="telefone" placeholder="Telefone"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" value="<?php if(isset($ClienteData['endereco'])) echo $ClienteData['endereco']; ?>" id="endereco" name="endereco" placeholder="Endereço"/>
+                    <div class="col-lg-4">
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="<?php if(isset($ClienteData['endereco'])) echo $ClienteData['endereco']; ?>" id="endereco" name="endereco" placeholder="Endereço"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" value="<?php if(isset($ClienteData['city'])) echo $ClienteData['city']; ?>" id="city" placeholder="Cidade"/>
+                    <div class="col-lg-4">
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="<?php if(isset($ClienteData['city'])) echo $ClienteData['city']; ?>" id="city" placeholder="Cidade"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" value="<?php if(isset($ClienteData['country'])) echo $ClienteData['country']; ?>" id="country" placeholder="País"/>
+                    <div class="col-lg-4">
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="<?php if(isset($ClienteData['country'])) echo $ClienteData['country']; ?>" id="country" placeholder="País"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <select class="form-control" id="type" name="type">
-                            <option value="F" <?php if(isset($ClienteData['type']) && $ClienteData['type'] == "F") echo "selected";  ?>>Pessoa Física</option>
-                            <option value="J" <?php if(isset($ClienteData['type']) && $ClienteData['type'] == "J") echo "selected";  ?>>Pessoa juridica</option>
-                        </select>
+                    <div class="col-lg-4">
+                        <div class="col-md-12 mb-3">
+                            <select class="form-control" id="type" name="type">
+                                <option value="F" <?php if(isset($ClienteData['type']) && $ClienteData['type'] == "F") echo "selected";  ?>>Pessoa Física</option>
+                                <option value="J" <?php if(isset($ClienteData['type']) && $ClienteData['type'] == "J") echo "selected";  ?>>Pessoa juridica</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-row">
-                    <div class="col-md-12 mb-3">
-                        <div class="input-group">
-                            <textarea class="form-control" id="obs" placeholder="Observações"><?php if(isset($ClienteData['obs'])) echo $ClienteData['obs']; ?></textarea>
+                    <div class="col-lg-12">
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group">
+                                <textarea class="form-control" id="obs" placeholder="Observações"><?php if(isset($ClienteData['obs'])) echo $ClienteData['obs']; ?></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 <?php
-$file = "export/items_kwanzar.xlsx";
-$arquivo = "export/items_kwanzar.xlsx";
+$file = "export/items_IsiSoft.xlsx";
+$arquivo = "export/items_IsiSoft.xlsx";
 
 if(isset($arquivo) && file_exists($arquivo)):
     switch(strtolower(substr(strrchr(basename($arquivo),"."),1))):

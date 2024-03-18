@@ -21,7 +21,7 @@ try{
     $mail->addAddress("{$Data['username']}", "{$Data['name']}");     //Add a recipient
 
     $mail->isHTML(true);
-    $mail->Subject = "Alteração da senha da conta Kwanzar!";
+    $mail->Subject = "Alteração da senha da conta IsiSoft!";
     $mail->Body    = "
      <p style='margin: 0px 25%!important;text-align: justify!important;'>Olá, <strong>{$Data['name']}</strong></p><br/>
                         <p style='margin: 0px 25%!important;text-align: justify!important;'>Uma solicitação de alteração da senha da sua conta foi feita recentemente. Caso tenha solicitado essa alteração de senha, você tem 24 horas para clicar no link abaixo para definir uma nova senha:</p><br/>

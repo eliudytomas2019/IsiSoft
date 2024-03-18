@@ -1,5 +1,5 @@
 <?php if($level >= 3): ?>
-    <div class="col-auto ms-auto">
+    <div class="col-auto ms-auto" hidden="hidden">
         <div id="getAlert"></div>
         <div class="d-flex">
             <input type="text" id="EliminarFacturaID" class="form-control d-inline-block w-9 me-3" placeholder="ID do documento"/>
@@ -10,7 +10,7 @@
     </div>
 <?php endif; ?>
 
-<div class="mb-3">
+<div class="mb-3" hidden="hidden">
     <div>
         <label class="row">
             <span class="col">Impostos (On/Off)</span>

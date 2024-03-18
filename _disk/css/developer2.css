@@ -269,6 +269,7 @@ table{
     align-items: flex-start;
     justify-items: flex-start;
     margin-top: -11px!important;
+    border: 1px solid #000!important;
 }
 
 .Uno span,

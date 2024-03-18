@@ -9,11 +9,7 @@
         </button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a href="">
-                <?php if(isset($DB->CheckCpanelAndSettings($id_db_settings, $id_db_kwanzar)['atividade']) && $DB->CheckCpanelAndSettings($id_db_settings, $id_db_kwanzar)['atividade'] == 19): ?>
-                    <img src="uploads/k_dental.png" width="110" height="32" alt="ProSmart" class="navbar-brand-image">
-                <?php else: ?>
-                    <img src="uploads/<?= $Index['logotype']; ?>" width="110" height="32" alt="ProSmart" class="navbar-brand-image">
-                <?php endif; ?>
+                <img src="uploads/<?= $Index['logotype']; ?>" width="110" height="32" alt="IsiSoft" class="navbar-brand-image">
             </a>
         </h1>
         <div class="navbar-nav flex-row order-md-last">

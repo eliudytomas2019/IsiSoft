@@ -36,87 +36,37 @@ endif;
                     if($read->getResult()):
                         $Data = $read->getResult()[0];
                         ?>
-                        <hgroup style="border: 2px solid #eee!important; padding: 10px!important;margin: 10px 0!important;border-radius: 5px!important;">
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Banco</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="banco" id="banco" class="form-control" value="<?= $Data['banco'] ?>" placeholder="Banco">
-                                </div>
-                            </div><br/>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">NIB</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="nib" id="nib" class="form-control" value="<?= $Data['nib'] ?>" placeholder="NIB">
-                                </div>
-                            </div><br/>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">IBAN</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="iban" id="iban" class="form-control" value="<?= $Data['iban'] ?>" placeholder="IBAN">
-                                </div>
-                            </div><br/>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">SWIFT</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="swift" id="swift" class="form-control" value="<?= $Data['swift'] ?>" placeholder="SWIFT">
-                                </div>
-                            </div><br/>
-                        </hgroup>
-
-                        <hgroup style="border: 2px solid #eee!important; padding: 10px!important;margin: 10px 0!important;border-radius: 5px!important;">
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Banco</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="banco1" id="banco1" class="form-control" value="<?= $Data['banco1'] ?>" placeholder="Banco">
-                                </div>
-                            </div><br/>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">NIB</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="nib1" id="nib1" class="form-control" value="<?= $Data['nib1'] ?>" placeholder="NIB">
-                                </div>
-                            </div><br/>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">IBAN</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="iban1" id="iban1" class="form-control" value="<?= $Data['iban1'] ?>" placeholder="IBAN">
-                                </div>
-                            </div><br/>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">SWIFT</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="swift1" id="swift1" class="form-control" value="<?= $Data['swift1'] ?>" placeholder="SWIFT">
-                                </div>
-                            </div><br/>
-                        </hgroup>
-
-                        <hgroup style="border: 2px solid #eee!important; padding: 10px!important;margin: 10px 0!important;border-radius: 5px!important;">
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Banco</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="banco2" id="banco2" class="form-control" value="<?= $Data['banco2'] ?>" placeholder="Banco">
-                                </div>
-                            </div><br/>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">NIB</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="nib2" id="nib2" class="form-control" value="<?= $Data['nib2'] ?>" placeholder="NIB">
-                                </div>
-                            </div><br/>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">IBAN</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="iban2" id="iban2" class="form-control" value="<?= $Data['iban2'] ?>" placeholder="IBAN">
-                                </div>
-                            </div><br/>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">SWIFT</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="swift2" id="swift2" class="form-control" value="<?= $Data['swift2'] ?>" placeholder="SWIFT">
-                                </div>
-                            </div><br/>
-                        </hgroup>
-                    <?php
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>BANCO</th>
+                                    <th>NIB</th>
+                                    <th>IBAN</th>
+                                    <th>SWIFT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" name="banco" id="banco" class="form-control" value="<?= $Data['banco'] ?>" placeholder="Banco"></td>
+                                    <td><input type="text" name="nib" id="nib" class="form-control" value="<?= $Data['nib'] ?>" placeholder="NIB"></td>
+                                    <td><input type="text" name="iban" id="iban" class="form-control" value="<?= $Data['iban'] ?>" placeholder="IBAN"></td>
+                                    <td><input type="text" name="swift" id="swift" class="form-control" value="<?= $Data['swift'] ?>" placeholder="SWIFT"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="banco1" id="banco1" class="form-control" value="<?= $Data['banco1'] ?>" placeholder="Banco"></td>
+                                    <td> <input type="text" name="nib1" id="nib1" class="form-control" value="<?= $Data['nib1'] ?>" placeholder="NIB"></td>
+                                    <td>  <input type="text" name="iban1" id="iban1" class="form-control" value="<?= $Data['iban1'] ?>" placeholder="IBAN"></td>
+                                    <td> <input type="text" name="swift1" id="swift1" class="form-control" value="<?= $Data['swift1'] ?>" placeholder="SWIFT"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" name="banco2" id="banco2" class="form-control" value="<?= $Data['banco2'] ?>" placeholder="Banco"></td>
+                                    <td><input type="text" name="nib2" id="nib2" class="form-control" value="<?= $Data['nib2'] ?>" placeholder="NIB"></td>
+                                    <td><input type="text" name="iban2" id="iban2" class="form-control" value="<?= $Data['iban2'] ?>" placeholder="IBAN"></td>
+                                    <td><input type="text" name="swift2" id="swift2" class="form-control" value="<?= $Data['swift2'] ?>" placeholder="SWIFT"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <?php
                     endif;
                     ?>
 

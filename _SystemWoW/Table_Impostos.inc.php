@@ -1,10 +1,10 @@
 <h2>Resumo de Impostos</h2>
-<table>
+<table style="border: 1px solid #000!important;">
     <thead>
     <tr>
-        <th>Descrição</th>
-        <th>Taxa%</th>
-        <th>Incidência</th>
+        <th style="border-right: 1px solid #000!important;">Descrição</th>
+        <th style="border-right: 1px solid #000!important;">Taxa%</th>
+        <th style="border-right: 1px solid #000!important;">Incidência</th>
         <th>Total Imposto</th>
     </tr>
     </thead>
@@ -13,10 +13,10 @@
     foreach ($Array0002 as $Itachi):
         ?>
         <tr>
-            <td><?= '<small style="color: #000">('.$Itachi['count'].') '.$Itachi["type"].'</small>'; ?></td>
-            <td><?= str_replace(",", ".", number_format($Itachi['taxa'], 2)); ?></td>
-            <td><?= str_replace(",", ".", number_format($Itachi['valor'], 2)); ?></td>
-            <td><?= str_replace(",", ".", number_format($Itachi['iva'], 2)); ?></td>
+            <td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?= '<small style="color: #000">('.$Itachi['count'].') '.$Itachi["type"].'</small>'; ?></td>
+            <td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($Itachi['taxa'], 2)); ?></td>
+            <td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($Itachi['valor'], 2)); ?></td>
+            <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($Itachi['iva'], 2)); ?></td>
         </tr>
     <?php
     endforeach;

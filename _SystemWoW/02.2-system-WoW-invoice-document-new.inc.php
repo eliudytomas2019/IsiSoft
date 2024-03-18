@@ -27,6 +27,7 @@ $suspenso = 0;
 $read = new Read();
 
 $t_gX01 = 0;
+$n_xxx = 0;
 
 $n4 = "sd_retification_pmp";
 $read->ExeRead("{$n4}", "WHERE id_db_settings=:i AND session_id=:idd AND status=:st AND id_invoice=:nn AND SourceBilling=:sc", "i={$id_db_settings}&idd={$id_user}&st={$ttt}&nn={$invoice_id}&sc={$SourceBilling}");
@@ -37,6 +38,15 @@ if($read->getResult()):
         $imposto  = ($value * $ey['taxa']) / 100;
 
         $t_gX01 += ($value - $desconto) + $imposto;
+    endforeach;
+endif;
+
+$fuck = null;
+$n7 = "sd_retification";
+$read->ExeRead("{$n7}", "WHERE id_db_settings=:i AND session_id=:idd AND status=:st AND id_invoice=:nn", "i={$id_db_settings}&idd={$id_user}&st={$ttt}&nn={$invoice_id}");
+if($read->getResult()):
+    foreach($read->getResult() as $ey):
+        $fuck += $ey['r'];
     endforeach;
 endif;
 
@@ -61,10 +71,10 @@ if($Read->getResult()):
             </div>
             <div class="header-silvio-b">
                 <h4>Exmo.(s) Sr.(s)</h4>
-                <span><?= $k['customer_name'] ?></span>
-                <span><?php if($k['customer_nif'] == null || $k['customer_nif'] == '' || $k['customer_nif'] == '999999999'): echo "Consumidor final"; else: echo $k['customer_nif']; endif; ?></span>
+                <span style="text-transform: uppercase!important;font-weight: bold!important;"><?= $k['customer_name'] ?></span>
                 <span><?= $k['customer_endereco'] ?></span>
-                <span><?= $k['customer_endereco_final'] ?></span>
+
+                <br/><span><?php if($k['customer_nif'] == null || $k['customer_nif'] == '' || $k['customer_nif'] == '999999999'): echo "Consumidor final"; else: echo $k['customer_nif']; endif; ?></span>
             </div>
         </div>
         <div class="limpopo-silvio">
@@ -77,17 +87,17 @@ if($Read->getResult()):
                 <span>Moeda: (<?= $k['settings_moeda']; ?>) 2ª via em conformidade com a original</span>
             <?php endif; ?>
         </div>
-        <table class="">
+        <table class="" style="border: 1px solid #000!important;">
             <thead>
             <tr>
-                <th>Data de emissão</th>
-                <th>Hora de emissão</th>
+                <th style="border-right: 1px solid #000!important;">Data de emissão</th>
+                <th style="border-right: 1px solid #000!important;">Hora de emissão</th>
                 <?php if($k['InvoiceType'] == 'FR'): ?>
-                    <th>Meio de pagamento</th>
+                    <th style="border-right: 1px solid #000!important;">Meio de pagamento</th>
                 <?php elseif($k['InvoiceType'] == 'PP'): ?>
-                    <th>Válida até</th>
+                    <th style="border-right: 1px solid #000!important;">Válida até</th>
                 <?php endif; ?>
-                <th>Emitida por</th>
+                <th style="border-right: 1px solid #000!important;">Emitida por</th>
                 <th>Página</th>
             </tr>
             </thead>
@@ -112,6 +122,7 @@ if($Read->getResult()):
         <?php
         foreach($Read->getResult() as $key):
             //extract($key);
+            $n_xxx += $key['r'];
 
             $p = $key;
 
@@ -166,9 +177,19 @@ if($Read->getResult()):
         endif;
 
         $descont_f = ($total_preco * $k['settings_desc_financ']) / 100;
-        $total_geral = ($total_valor - ($descont_f + $total_desconto + $Retencao)) + $totol_iva;
+        $total_geral = ($total_valor - $total_desconto) + $totol_iva;
         ?>
-        <?php $px1 = $k['f'] - $t_gX01; ?>
+        <?php
+            $Shush = $t_gX01 - $fuck;
+            $px1 = $k['f'] - $t_gX01;
+
+
+            if($Shush == 0):
+                $px1 = 0;
+            else:
+                $px1 = abs($px1);
+            endif;
+        ?>
 
         <div class="GotMe">
             <p class="jud">

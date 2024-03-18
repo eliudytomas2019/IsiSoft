@@ -5,11 +5,6 @@ define('SenhaEmail', "##k@167435");
 define('PortaEmail', "465");
 define('EmailName', "A Equipe IsiSoft");
 
-
-define("API", "https://galeranerd.kwanzar.ao/api.php/");
-
-// BASE DO PROGRAMA #####
-// DIREÇÕES DE BASE DO PROGRAMA #####
 define('HOME', 'http://localhost/isisoft/');
 define("THEME","isisoft/");
 define("INCLUDE_PATH", HOME . 'themes' . THEME);
@@ -20,9 +15,6 @@ define('USER', "root");
 define('PASS', "");
 define('DBSA', "isisoft");
 
-
-// CLASSE AUTOLOAD, A CLASSE QUE VAI SOBREVOAR AS PASTAS ##########
-//A CLASSE QUE TAMBÉM FAZ A ORGANIZAÇÃO E SOBREVOA AS SUBPASTAS ########
 spl_autoload_register(function ($Class){
     $cDir = ['Conn', 'Config', 'AppData', '2022', '2023'];
     $iDir = null;
@@ -38,14 +30,12 @@ spl_autoload_register(function ($Class){
         trigger_error("Não foi possível incluir a {$Class}.class.php", E_USER_ERROR);
     endif;
 });
-// TRATAMENTO DE ERROS DE MODO PERSONALIZADO NO SISTEMA #############
-// DEFINIÇÕES DE ERRO ######
+
 define('WS_ACCEPT', 'accept');
 define('WS_INFOR', 'infor');
 define('WS_ALERT', 'alert');
 define('WS_ERROR', 'error');
 
-// WSErroR :: EXIBE OS ERROS :: FRONT
 function WSError($ErrMsg, $ErrNo, $ErrDie = null){
     $CssClass = ($ErrNo == E_USER_NOTICE ? WS_INFOR : ($ErrNo == E_USER_WARNING ? WS_ACCEPT : ($ErrNo == E_USER_ERROR ? WS_ERROR : $ErrNo)));
 
@@ -55,7 +45,7 @@ function WSError($ErrMsg, $ErrNo, $ErrDie = null){
         die;
     endif;
 }
-// PHPErro :: PERSONALIZA O GATILHO DE ERROS DO PHP
+
 function PHPError($ErrNo, $ErrMsg, $ErrFile, $ErrLine){
     $CssClass = ($ErrNo == E_USER_NOTICE ? WS_INFOR : ($ErrNo == E_USER_WARNING ? WS_ALERT : WS_ERROR));
 

@@ -50,10 +50,10 @@
             </div>
             <div class="header-silvio-b">
                 <h4>Exmo.(s) Sr.(s)</h4>
-                <span><?= $k['customer_name'] ?></span>
-                <span><?php if($k['customer_nif'] == null || $k['customer_nif'] == '' || $k['customer_nif'] == '999999999'): echo "Consumidor final"; else: echo $k['customer_nif']; endif; ?></span>
+                <span style="text-transform: uppercase!important;font-weight: bold!important;"><?= $k['customer_name'] ?></span>
                 <span><?= $k['customer_endereco'] ?></span>
-                <span><?= $k['customer_endereco_final'] ?></span>
+
+                <br/><span><?php if($k['customer_nif'] == null || $k['customer_nif'] == '' || $k['customer_nif'] == '999999999'): echo "Consumidor final"; else: echo $k['customer_nif']; endif; ?></span>
             </div>
         </div>
         <div class="limpopo-silvio">
@@ -67,20 +67,20 @@
                 <span>Moeda: (<?= $k['settings_moeda']; ?>) 2ª via em conformidade com a original</span>
             <?php endif; ?>
         </div>
-        <table class="">
+        <table class="" style="border: 1px solid #000!important;">
             <thead>
             <tr>
-                <th>Data de emissão</th>
-                <th>Hora de emissão</th>
-                <th>Emitida por</th>
+                <th style="border-right: 1px solid #000!important;">Data de emissão</th>
+                <th style="border-right: 1px solid #000!important;">Hora de emissão</th>
+                <th style="border-right: 1px solid #000!important;">Emitida por</th>
                 <th>Página</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td><?= $k['ano']."-".$k['mes']."-".$k['dia'] ?></td>
-                <td><?= $k['hora'] ?></td>
-                <td><?= $k['username'] ?></td>
+                <td style="border-right: 1px solid #000!important;"><?= $k['ano']."-".$k['mes']."-".$k['dia'] ?></td>
+                <td style="border-right: 1px solid #000!important;"><?= $k['hora'] ?></td>
+                <td style="border-right: 1px solid #000!important;"><?= $k['username'] ?></td>
                 <td><label class="page"></label></td>
             </tr>
             </tbody>
@@ -89,7 +89,7 @@
 
     <div class="table-silvio">
         <table>
-            <thead class="punheta">
+            <thead class="punheta" style="border: 1px solid #000!important;">
             <tr>
                 <th>Código</th>
                 <th>Descriminação</th>
@@ -129,18 +129,18 @@
 
                 $value_01 = $value + $iva;
                 ?>
-                <tr>
-                    <td><?= $key['product_code']; ?></td>
-                    <td>
+                <tr style="border-bottom: 1px solid #000!important;">
+                    <td style="border-bottom: 1px solid #000!important;"><?= $key['product_code']; ?></td>
+                    <td style="border-bottom: 1px solid #000!important;">
                         <?= $key['product_name'] ?>
                         <?php if(DBKwanzar::CheckConfig($id_db_settings) == false || DBKwanzar::CheckConfig($id_db_settings)['PadraoAGT'] == null || DBKwanzar::CheckConfig($id_db_settings)['PadraoAGT'] == 2): ?><?php if($key['taxa'] == 0): echo ' <small>('.$n.')</small>'; endif; ?><?php endif; ?><br/>
                         <?php if($key['taxa'] == 0): ?><small style="font-size: 7pt!important;"><?= $key['TaxExemptionReason']; ?></small><br/><?php endif; ?>
                         <small><?= $key['product_list']; ?></small>
                     </td>
-                    <td><?= str_replace(",", ".", number_format($key['quantidade_pmp'], 2)) ?></td>
-                    <td><?= str_replace(",", ".", number_format($key['preco_pmp'], 2));  ?></td>
-                    <td><?= str_replace(",", ".", number_format($key['desconto_pmp'], 2));  ?></td>
-                    <td><?= str_replace(",", ".", number_format($key['taxa'], 2));  ?>  <?php if(DBKwanzar::CheckConfig($id_db_settings) == false || DBKwanzar::CheckConfig($id_db_settings)['PadraoAGT'] == null || DBKwanzar::CheckConfig($id_db_settings)['PadraoAGT'] == 2): ?><?php if($key['taxa'] == 0): echo "(".$key['TaxExemptionCode'].")"; endif; ?><?php endif; ?></td>
+                    <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($key['quantidade_pmp'], 2)) ?></td>
+                    <td v><?= str_replace(",", ".", number_format($key['preco_pmp'], 2));  ?></td>
+                    <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($key['desconto_pmp'], 2));  ?></td>
+                    <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($key['taxa'], 2));  ?>  <?php if(DBKwanzar::CheckConfig($id_db_settings) == false || DBKwanzar::CheckConfig($id_db_settings)['PadraoAGT'] == null || DBKwanzar::CheckConfig($id_db_settings)['PadraoAGT'] == 2): ?><?php if($key['taxa'] == 0): echo "(".$key['TaxExemptionCode'].")"; endif; ?><?php endif; ?></td>
                     <td><?= str_replace(",", ".", number_format($value_01, 2));  ?></td>
                 </tr>
             <?php
@@ -177,14 +177,14 @@
             </div>
 
             <div class="cripton-silvio-b">
-                <table class="spec">
-                    <tr><td>Total Ilíquido</td> <td><?php echo str_replace(",", ".", number_format($total_preco, 2)); ?></td></tr>
-                    <tr><td>Desconto Comercial</td> <td><?php echo str_replace(",", ".", number_format($total_desconto, 2));  ?></td></tr>
-                    <tr><td>Desconto Financeiro (<?= str_replace(",", ".", number_format($k['settings_desc_financ'], 1)); ?>%)</td> <td><?= str_replace(",", ".",number_format($descont_f, 2)); ?></td></tr>
-                    <tr><td>Total de Imposto</td> <td><?php echo str_replace(",", ".", number_format($totol_iva, 2)); ?></td></tr>
+                <table class="spec"  style="border: 1px solid #000!important;">
+                    <tr style="border-bottom: 1px solid #000!important;"><td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Total Ilíquido</td> <td style="border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($total_preco, 2)); ?></td></tr>
+                    <tr style="border-bottom: 1px solid #000!important;"><td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Desconto Comercial</td> <td style="border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($total_desconto, 2));  ?></td></tr>
+                    <tr style="border-bottom: 1px solid #000!important;"><td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Desconto Financeiro (<?= str_replace(",", ".", number_format($k['settings_desc_financ'], 1)); ?>%)</td> <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".",number_format($descont_f, 2)); ?></td></tr>
+                    <tr style="border-bottom: 1px solid #000!important;"><td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Total de Imposto</td> <td style="border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($totol_iva, 2)); ?></td></tr>
                     <?php if($k['method'] == 'NU' && $k['InvoiceType'] != 'PP'): ?>
-                        <tr><td>Pagou</td> <td><?= str_replace(",", ".", number_format($p['pagou'] ,2)); ?></td></tr>
-                        <tr><td>Troco</td> <td><?= str_replace(",", ".", number_format($p['troco'] ,2)); ?></td></tr>
+                        <tr style="border-bottom: 1px solid #000!important;"><td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Pagou</td> <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($p['pagou'] ,2)); ?></td></tr>
+                        <tr><td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Troco</td> <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($p['troco'] ,2)); ?></td></tr>
                     <?php endif; ?>
                 </table>
 

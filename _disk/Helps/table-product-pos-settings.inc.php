@@ -1,9 +1,7 @@
 <table  class="table text-wrap table-responsive">
     <thead>
         <tr>
-            <th style="max-width: 20%!important;">Código</th>
             <th style="max-width: 20%!important;">Item</th>
-            <th style="max-width: 20%!important;">Codigo de barras</th>
             <th style="max-width: 15%!important;">Qtd</th>
             <th style="max-width: 20%!important;">Preço Uni.</th>
             <th style="max-width: 15%!important;">Desc%</th>
@@ -57,9 +55,7 @@
                 $t_sub += $value;
                 ?>
                 <tr style="font-size: 10pt!important;">
-                    <td style="max-width: 20%!important;"><?= $key['product_code']; ?></td>
                     <td style="max-width: 20%!important;"><?= $key['product_name']; ?></td>
-                    <td style="max-width: 20%!important;"><?= $key['product_codigo_barras']; ?></td>
                     <td style="max-width: 10%!important;">
                         <input type="number" style="max-width: 100%!important;" value="<?= $key['quantidade_tmp']; ?>" min="<?= $key['quantidade_tmp']; ?>" class="form-control Qtds" data-file="<?= $key['id']; ?>" placeholder="Qtd">
                     </td>

@@ -1,6 +1,16 @@
 <?php if($level >= 1): ?>
     <div class="nav-item d-none d-md-flex me-3">
         <div class="btn-list">
+            <?php if(isset($id_db_settings)):
+                $Read = new Read();
+                $Read->ExeRead("db_settings", "WHERE id=:i ", "i={$id_db_settings}");
+
+                if($Read->getResult()):
+                    $Company = $Read->getResult()[0]['empresa'];
+                endif;
+            ?>
+            <h2 style="margin-top: 5px!important;font-weight: bold!important;margin-left: 5px!important;margin-right: 5px!important;text-transform: uppercase!important;color: #000!important;"><?= $Company; ?></h2>
+            <?php endif; ?>
             <a href="<?php if(isset($n)): ?>panel.php?exe=settings/licence<?= $n; ?><?php else: echo "#"; endif; ?>" class="btn btn-outline-white" style="color: #00345c!important;" rel="noreferrer">
                 <?php
                 $st = 1;
