@@ -20,9 +20,9 @@ body{
 
 .img-silvio{
     width: auto;
-    max-width: 180px!important;
+    max-width: 160px!important;
     height: auto;
-    max-height: 180px!important;
+    max-height: 160px!important;
     margin-bottom: 5px!important;
 }
 
@@ -93,7 +93,7 @@ body{
 .limpopo-silvio{
     width: 100%;
     height: auto;
-    padding: 5px 35px;
+    padding: 5px;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -192,7 +192,7 @@ table tbody tr td.pp{
 
 .table-silvio{
     width: 100%!important;
-    height: 520px;
+    height: 500px;
     box-sizing: border-box!important;
 }
 
@@ -305,8 +305,7 @@ table tbody tr td.pp{
 
 .total-silvio{
     width: 100%;
-    margin: 5px 0!important;
-    border-top: 2px solid #000000!important;
+    margin: 1px 0!important;
     padding: 0;
     display: flex;
     flex-direction: row;
@@ -318,7 +317,7 @@ table tbody tr td.pp{
 
 .total-silvio p{
     font-weight: bold!important;
-    font-size: 10pt!important;
+    font-size: 8pt!important;
     margin: 0!important;
     margin-top: 3px!important;
     padding: 0!important;

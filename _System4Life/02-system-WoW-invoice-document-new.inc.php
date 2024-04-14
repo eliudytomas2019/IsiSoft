@@ -31,7 +31,7 @@
 
     if($read->getResult()):
         $k = $read->getResult()[0];
-        POS::Timer($k['numero'], $InvoiceType);
+        //POS::Timer($k['numero'], $InvoiceType);
         ?>
         <div class="header">
             <img src="./uploads/<?php if($k['settings_logotype'] == null || $k['settings_logotype'] == null): echo $Index['logotype']; else: echo $k['settings_logotype']; endif;  ?>" class="img-silvio"/>
@@ -190,33 +190,30 @@
                 <div class="cripton-silvio-a">
                     <?php  require("./_SystemWoW/Table_Impostos.inc.php"); ?>
 
-                    <?php if(!empty($k['settings_banco']) || !empty($k['settings_banco1']) || !empty($k['settings_banco2'])): ?>
-                        <label class="Uno ap">
-                            <span>BANCO</span>
-                            <p><?= $k['settings_banco'] ?> | <?= $k['settings_banco1'] ?> | <?= $k['settings_banco2'] ?></p>
-                        </label>
-                    <?php endif;  ?>
-
-                    <?php if(!empty($k['settings_nib']) || !empty($k['settings_nib1']) || !empty($k['settings_nib2'])): ?>
-                        <label class="Uno">
-                            <span>CONTA/NIB</span>
-                            <p><?= $k['settings_nib'] ?> | <?= $k['settings_nib1'] ?> | <?= $k['settings_nib2'] ?></p>
-                        </label>
-                    <?php endif;  ?>
-
-                    <?php if(!empty($k['settings_iban']) || !empty($k['settings_iban1']) || !empty($k['settings_iban2'])): ?>
-                        <label class="Uno">
-                            <span>IBAN</span>
-                            <p><?= $k['settings_iban'] ?> | <?= $k['settings_iban1'] ?> | <?= $k['settings_iban2'] ?></p>
-                        </label>
-                    <?php endif;  ?>
-
-                    <?php if(!empty($k['settings_swift']) || !empty($k['settings_swift1']) || !empty($k['settings_swift2'])): ?>
-                        <label class="Uno af">
-                            <span>SWIFT/BIC</span>
-                            <p><?= $k['settings_swift'] ?> | <?= $k['settings_swift1'] ?> | <?= $k['settings_swift2'] ?></p>
-                        </label>
-                    <?php endif;  ?>
+                    <table style="font-size: 7pt!important;border: 1px solid #000!important;border-right: none!important;border-bottom: none!important;">
+                        <thead>
+                            <tr style="font-size: 7pt!important;">
+                                <th style="border-right: 1px solid #000!important;">BANCO</th>
+                                <th style="border-right: 1px solid #000!important;">CONTA</th>
+                                <th style="border-right: 1px solid #000!important;">IBAN</th>
+                                <th style="border-right: 1px solid #000!important;">SWIFT/BIC</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="font-size: 7pt!important;">
+                                <td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;"><?= $k['settings_banco'] ?></td>
+                                <td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;"><?= $k['settings_nib'] ?></td>
+                                <td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;"><?= $k['settings_iban'] ?></td>
+                                <td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;"><?= $k['settings_swift'] ?></td>
+                            </tr>
+                            <tr style="font-size: 8pt!important;">
+                                <td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;"><?= $k['settings_banco1'] ?></td>
+                                <td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;"><?= $k['settings_nib1'] ?></td>
+                                <td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;"><?= $k['settings_iban1'] ?></td>
+                                <td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;"><?= $k['settings_swift1'] ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                     <div class="nota-silvio">
                         <?php
@@ -226,26 +223,31 @@
                 </div>
 
                 <div class="cripton-silvio-b">
-                    <table class="spec" style="border: 1px solid #000!important;">
-                        <tr style="border-bottom: 1px solid #000!important;"><td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Total Ilíquido</td> <td style="border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($total_preco, 2)); ?></td></tr>
-                        <tr style="border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Desconto Comercial</td> <td style="border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($total_desconto, 2));  ?></td></tr>
-                        <tr style="border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Desconto Financeiro (<?= str_replace(",", ".", number_format($k['settings_desc_financ'], 1)); ?>%)</td> <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".",number_format($descont_f, 2)); ?></td></tr>
-                        <tr style="border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Total de Imposto</td> <td style="border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($totol_iva, 2)); ?></td></tr>
+                    <table class="spec">
+                        <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-left: 1px solid #000!important;border-top: 1px solid #000!important;border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Total Ilíquido</td> <td style="border-right: 1px solid #000!important;border-top: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($total_preco, 2)); ?></td></tr>
+                        <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Desconto Comercial</td> <td style="border-right: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($total_desconto, 2));  ?></td></tr>
+                        <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Desconto Financeiro</td> <td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?= str_replace(",", ".",number_format($descont_f, 2)); ?></td></tr>
+                        <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Total de Imposto</td> <td style="border-right: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($totol_iva, 2)); ?></td></tr>
                         <?php if($k['method'] == 'NU' && $k['InvoiceType'] != 'PP'): ?>
-                            <tr style="border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Pagou</td> <td><?= str_replace(",", ".", number_format($p['pagou'] ,2)); ?></td></tr>
-                            <tr style="border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Troco</td> <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($p['troco'] ,2)); ?></td></tr>
+                            <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Pagou</td> <td style="border-right: 1px solid #000!important;"><?= str_replace(",", ".", number_format($p['pagou'] ,2)); ?></td></tr>
+                            <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Troco</td> <td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($p['troco'] ,2)); ?></td></tr>
                         <?php endif; ?>
                         <?php if($k['method'] == 'ALL' && $k['InvoiceType'] != 'PP'): ?>
-                            <tr style="border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Númerario</td> <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($p['numerario'] ,2)); ?></td></tr>
-                            <tr style="border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Cartão de Débito</td> <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($p['cartao_de_debito'] ,2)); ?></td></tr>
-                            <tr style="border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Transferência</td> <td><?= str_replace(",", ".", number_format($p['transferencia'] ,2)); ?></td></tr>
+                            <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Númerario</td> <td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($p['numerario'] ,2)); ?></td></tr>
+                            <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Cartão de Débito</td> <td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($p['cartao_de_debito'] ,2)); ?></td></tr>
+                            <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Transferência</td> <td style="border-right: 1px solid #000!important;"><?= str_replace(",", ".", number_format($p['transferencia'] ,2)); ?></td></tr>
                         <?php endif; ?>
-                        <tr style="border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Retenção (<?= str_replace(",", ".", number_format($k['RetencaoDeFonte'], 1)) ?>%)</td> <td style="border-bottom: 1px solid #000!important;"><?php if($k['IncluirNaFactura'] == 2): ?><?php echo number_format($Retencao, 2);  ?><?php  endif; ?></td></tr>
-                    </table>
+                        <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Ret. Fonte (<?= str_replace(",", ".", number_format($k['RetencaoDeFonte'], 1)) ?>%)</td> <td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?php if($k['IncluirNaFactura'] == 2): ?><?php echo number_format($Retencao, 2);  ?><?php  endif; ?></td></tr>
 
-                    <div class="total-silvio">
-                        <p>Total (<?= $k['settings_moeda']; ?>) <?= str_replace(",", ".", number_format($total_geral ,2)); ?></p>
-                    </div>
+                        <tr style="border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Total a Pagar (<?= $k['settings_moeda']; ?>): </td> <td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($total_geral ,2)); ?></td></tr>
+                    </table>
+                    <p style="font-size: 10pt!important;font-weight: bold!important;">
+                        <?php
+                            $fxs = new NumberFormatter("pt_BR", NumberFormatter::SPELLOUT);
+                            $word = $fxs->format($total_geral);
+                            echo $word." kwanzas ";
+                        ?>
+                    </p>
                 </div>
             </div>
         </div>

@@ -269,99 +269,7 @@ if($acao):
             $a = 1;
 
             $read = new Read();
-            $read->FullRead("SELECT *
-FROM cv_product
-LEFT JOIN cv_category ON cv_category.id_db_settings = cv_product.id_db_settings
-                       AND cv_category.id_xxx = cv_product.id_category
-WHERE 
-    cv_product.id_db_settings ={$id_db_settings}
-    AND (
-        cv_product.product LIKE '%' '{$searching}' '%'
-        AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR(
-        cv_product.codigo LIKE '%' '{$searching}' '%'
-        AND cv_product.product LIKE '%' '{$SearchProduct01}' '%'
-    )OR(
-        cv_product.product LIKE '%' '{$searching}' '%'
-        AND cv_product.product LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR(
-        cv_product.codigo_barras LIKE '%' '{$searching}' '%'
-        AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR (
-        cv_product.codigo LIKE '%' '{$searching}' '%'
-        AND cv_product.codigo_barras LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR(
-        cv_product.product LIKE '%' '{$searching}' '%'
-        AND cv_product.remarks LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR(
-        cv_product.remarks LIKE '%' '{$searching}' '%'
-        AND cv_product.local_product LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR(
-        cv_product.local_product LIKE '%' '{$searching}' '%'
-        AND cv_product.remarks LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR (
-        cv_product.product LIKE '%' '{$searching}' '%'
-        AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR(
-        cv_category.category_title LIKE '%' '{$searching}' '%'
-        AND cv_product.product LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_product.product LIKE '%' '{$searching}' '%'
-        AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_category.category_title LIKE '%' '{$searching}' '%'
-        AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_product.codigo LIKE '%' '{$searching}' '%'
-        AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_category.category_title LIKE '%' '{$searching}' '%'
-        AND cv_product.codigo_barras LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_product.codigo_barras LIKE '%' '{$searching}' '%'
-        AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_category.category_title LIKE '%' '{$searching}' '%'
-        AND cv_product.remarks LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_product.remarks LIKE '%' '{$searching}' '%'
-        AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_category.category_title LIKE '%' '{$searching}' '%'
-        AND cv_product.local_product LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_product.local_product LIKE '%' '{$searching}' '%'
-        AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-ORDER BY cv_product.product ASC
-LIMIT 50");
+            $read->FullRead("SELECT * FROM cv_product LEFT JOIN cv_category ON cv_category.id_db_settings = cv_product.id_db_settings AND cv_category.id_xxx = cv_product.id_category WHERE cv_product.id_db_settings ={$id_db_settings} AND (cv_product.id_db_settings ={$id_db_settings} AND cv_product.product LIKE '%' '{$searching}' '%' AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.codigo LIKE '%' '{$searching}' '%' AND cv_product.product LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.product LIKE '%' '{$searching}' '%' AND cv_product.product LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.codigo_barras LIKE '%' '{$searching}' '%' AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.codigo LIKE '%' '{$searching}' '%' AND cv_product.codigo_barras LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.product LIKE '%' '{$searching}' '%' AND cv_product.remarks LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.remarks LIKE '%' '{$searching}' '%' AND cv_product.local_product LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.local_product LIKE '%' '{$searching}' '%' AND cv_product.remarks LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.product LIKE '%' '{$searching}' '%' AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_category.category_title LIKE '%' '{$searching}' '%' AND cv_product.product LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR (cv_product.id_db_settings ={$id_db_settings} AND cv_product.product LIKE '%' '{$searching}' '%' AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_category.category_title LIKE '%' '{$searching}' '%' AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.codigo LIKE '%' '{$searching}' '%' AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_category.category_title LIKE '%' '{$searching}' '%' AND cv_product.codigo_barras LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.codigo_barras LIKE '%' '{$searching}' '%' AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_category.category_title LIKE '%' '{$searching}' '%' AND cv_product.remarks LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.remarks LIKE '%' '{$searching}' '%' AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_category.category_title LIKE '%' '{$searching}' '%' AND cv_product.local_product LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.local_product LIKE '%' '{$searching}' '%' AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) ORDER BY cv_product.product ASC LIMIT 50");
 
             if($read->getResult()):
                 foreach($read->getResult() as $key):
@@ -1426,6 +1334,8 @@ LIMIT 50");
             if(isset($_POST['numerario'])): $Data['numerario'] = (double) $_POST['numerario']; endif;
             if(isset($_POST['all_total'])): $Data['all_total'] = (double) $_POST['all_total']; endif;
 
+            if(!isset($Data)): $Data = array(); endif;
+
             if(isset($_POST['id_mesa'])): $id_mesa = $_POST['id_mesa']; else: $id_mesa = null; endif;
 
             $POS = new POS();
@@ -1444,6 +1354,8 @@ LIMIT 50");
             if(isset($_POST['pagou'])): $Data['pagou'] = (double) $_POST['pagou']; endif;
             if(isset($_POST['troco'])): $Data['troco'] = (double) $_POST['troco']; endif;
             if(isset($_POST['id_mesa'])): $id_mesa = $_POST['id_mesa']; else: $id_mesa = null; endif;
+
+            if(!isset($Data)): $Data = array(); endif;
 
             $POS = new POS();
             $POS->Finish($id_db_settings, $id_user, $Data, $id_db_kwanzar, $page_found);
@@ -1566,6 +1478,9 @@ LIMIT 50");
             endif;
 
             break;
+        case 'Niver':
+            require_once("../../_disk/Helps/Niver.inc.php");
+            break;
         case 'Add':
             $page_found = strip_tags(($_POST['page_found']));
             $Data['page_found'] = strip_tags(($_POST['page_found']));
@@ -1588,105 +1503,15 @@ LIMIT 50");
 
             break;
         case 'SearchProduct':
+            $page_found = $_POST['page_found'];
+
             $NnM = 0;
             $searching = strip_tags(($_POST['SearchProduct']));
             $SearchProduct01 = strip_tags(($_POST['SearchProduct01']));
             $a = 1;
 
             $read = new Read();
-            $read->FullRead("SELECT *
-FROM cv_product
-LEFT JOIN cv_category ON cv_category.id_db_settings = cv_product.id_db_settings
-                       AND cv_category.id_xxx = cv_product.id_category
-WHERE 
-    cv_product.id_db_settings ={$id_db_settings}
-    AND (
-        cv_product.product LIKE '%' '{$searching}' '%'
-        AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR(
-        cv_product.codigo LIKE '%' '{$searching}' '%'
-        AND cv_product.product LIKE '%' '{$SearchProduct01}' '%'
-    )OR(
-        cv_product.product LIKE '%' '{$searching}' '%'
-        AND cv_product.product LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR(
-        cv_product.codigo_barras LIKE '%' '{$searching}' '%'
-        AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR (
-        cv_product.codigo LIKE '%' '{$searching}' '%'
-        AND cv_product.codigo_barras LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR(
-        cv_product.product LIKE '%' '{$searching}' '%'
-        AND cv_product.remarks LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR(
-        cv_product.remarks LIKE '%' '{$searching}' '%'
-        AND cv_product.local_product LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR(
-        cv_product.local_product LIKE '%' '{$searching}' '%'
-        AND cv_product.remarks LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR (
-        cv_product.product LIKE '%' '{$searching}' '%'
-        AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%'
-    )
-    OR(
-        cv_category.category_title LIKE '%' '{$searching}' '%'
-        AND cv_product.product LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_product.product LIKE '%' '{$searching}' '%'
-        AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_category.category_title LIKE '%' '{$searching}' '%'
-        AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_product.codigo LIKE '%' '{$searching}' '%'
-        AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_category.category_title LIKE '%' '{$searching}' '%'
-        AND cv_product.codigo_barras LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_product.codigo_barras LIKE '%' '{$searching}' '%'
-        AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_category.category_title LIKE '%' '{$searching}' '%'
-        AND cv_product.remarks LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_product.remarks LIKE '%' '{$searching}' '%'
-        AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_category.category_title LIKE '%' '{$searching}' '%'
-        AND cv_product.local_product LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-    OR (
-        cv_product.local_product LIKE '%' '{$searching}' '%'
-        AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%'
-        AND cv_product.id_category = cv_category.id_xxx
-    )
-ORDER BY cv_product.product ASC
-LIMIT 50");
+            $read->FullRead("SELECT * FROM cv_product LEFT JOIN cv_category ON cv_category.id_db_settings = cv_product.id_db_settings AND cv_category.id_xxx = cv_product.id_category WHERE cv_product.id_db_settings ={$id_db_settings} AND (cv_product.id_db_settings ={$id_db_settings} AND cv_product.product LIKE '%' '{$searching}' '%' AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.codigo LIKE '%' '{$searching}' '%' AND cv_product.product LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.product LIKE '%' '{$searching}' '%' AND cv_product.product LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.codigo_barras LIKE '%' '{$searching}' '%' AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.codigo LIKE '%' '{$searching}' '%' AND cv_product.codigo_barras LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.product LIKE '%' '{$searching}' '%' AND cv_product.remarks LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.remarks LIKE '%' '{$searching}' '%' AND cv_product.local_product LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.local_product LIKE '%' '{$searching}' '%' AND cv_product.remarks LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.product LIKE '%' '{$searching}' '%' AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%') OR(cv_product.id_db_settings ={$id_db_settings} AND cv_category.category_title LIKE '%' '{$searching}' '%' AND cv_product.product LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR (cv_product.id_db_settings ={$id_db_settings} AND cv_product.product LIKE '%' '{$searching}' '%' AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_category.category_title LIKE '%' '{$searching}' '%' AND cv_product.codigo LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.codigo LIKE '%' '{$searching}' '%' AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_category.category_title LIKE '%' '{$searching}' '%' AND cv_product.codigo_barras LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.codigo_barras LIKE '%' '{$searching}' '%' AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_category.category_title LIKE '%' '{$searching}' '%' AND cv_product.remarks LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.remarks LIKE '%' '{$searching}' '%' AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_category.category_title LIKE '%' '{$searching}' '%' AND cv_product.local_product LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) OR(cv_product.id_db_settings ={$id_db_settings} AND cv_product.local_product LIKE '%' '{$searching}' '%' AND cv_category.category_title LIKE '%' '{$SearchProduct01}' '%' AND cv_product.id_category = cv_category.id_xxx) ORDER BY cv_product.product ASC LIMIT 50");
             if($read->getResult()):
                 foreach($read->getResult() as $key):
                     if($key['ILoja'] == 2 || $key['ILoja'] == null || $key['ILoja'] == '' || $key['ILoja'] != 1):
@@ -1725,29 +1550,48 @@ LIMIT 50");
                         else:
                             $alertY = "bg-success";
                         endif;
+
+                        if($page_found != 'proforma'):
                         ?>
+                        <li>
+                            <input type="hidden" id="codigo_barras_<?= $key['id']; ?>" disabled value="<?= $key['codigo_barras']; ?>"><?=  $key['codigo_barras']; ?>
+                            <input hidden="hidden" style="width: 60%!important;" type="number" id="desconto_<?= $key['id']; ?>" class="form-kwanzar" min="0" max="100000000000000000000000" value="<?= $Emanuel; ?>" placeholder="Desconto">
+                            <input style="width: 100%!important;" type="hidden" id="taxa_<?= $key['id']; ?>" class="form-kwanzar" disabled value="<?= $key['id_iva']; ?>" placeholder="Taxa de imposto">
+                            <input hidden="hidden" type="text" class="form-kwanzar" id="preco_<?= $key['id']; ?>" disabled value="<?= $preco; ?>">
+                            <input hidden="hidden" style="width: 100%!important;" type="number" class="form-kwanzar" id="quantidade_<?= $key['id']; ?>" min="1" value="1">
+                            <input type="hidden" value="<?= $userlogin['id']; ?>" id="session_id_<?= $key['id']; ?>">
+                            <input type="hidden" value="<?= $id_db_settings; ?>" id="id_db_settings_<?= $key['id']; ?>">
+
+                            <a href="javascript:void()" onclick="adicionar(<?= $key['id']; ?>)"><img src="uploads/<?php if($key["cover"] == null || !isset($key["cover"])): echo 'default.jpg'; else: echo $key["cover"]; endif; ?>"/>
+                                <span><?= $key['product']; ?></span>
+                                <label><?= $key['quantidade']; ?></label></a>
+                        </li>
+                        <?php
+                        else: ?>
                         <tr>
-                            <td style="max-width: 10%!important;font-size: 10pt!important;"><span class="badge <?= $alertY; ?> me-1"></span></td>
-                            <td style="max-width: 30%!important;font-size: 10pt!important;"><?=  $key['codigo']; ?></td>
+                            <td hidden="hidden" style="max-width: 10%!important;font-size: 10pt!important;"><span class="badge <?= $alertY; ?> me-1"></span></td>
+                            <td hidden="hidden" style="max-width: 30%!important;font-size: 10pt!important;"><?=  $key['codigo']; ?></td>
                             <td style="max-width: 30%!important;font-size: 10pt!important;"><?=  $key['product']; ?></td>
-                            <td style="max-width: 30%!important;font-size: 10pt!important;">
+                            <td hidden="hidden" style="max-width: 30%!important;font-size: 10pt!important;">
                                 <input type="hidden" id="codigo_barras_<?= $key['id']; ?>" disabled value="<?= $key['codigo_barras']; ?>"><?=  $key['codigo_barras']; ?>
                             </td>
-                            <td style="max-width: 10%!important;"><input style="width: 100%!important;" <?php if($level < 3): ?> disabled <?php endif; ?> type="number" id="desconto_<?= $key['id']; ?>" class="form-kwanzar" min="0" max="100000000000000000000000" value="<?= $Emanuel; ?>" placeholder="Desconto"></td>
-                            <td style="max-width: 10%!important;"><input style="width: 100%!important;" type="hidden" id="taxa_<?= $key['id']; ?>" class="form-kwanzar" disabled value="<?= $key['id_iva']; ?>" placeholder="Taxa de imposto"><?= $key['iva']; ?></td>
-                            <td style="max-width: 10%!important;"><input style="width: 100%!important;" type="text" class="form-kwanzar" id="preco_<?= $key['id']; ?>" disabled value="<?= $preco; ?>"></td>
-                            <td style="max-width: 20%!important;"><input style="width: 100%!important;" type="number" class="form-kwanzar" id="quantidade_<?= $key['id']; ?>" min="1" value="1"><br/><center>Exis.: <span><?= $NnM; ?></span></center></td>
-                            <td style="max-width: 1%!important;"><input type="hidden" value="<?= $userlogin['id']; ?>" id="session_id_<?= $key['id']; ?>"></td>
-                            <td style="max-width: 1%!important;"><input type="hidden" value="<?= $id_db_settings; ?>" id="id_db_settings_<?= $key['id']; ?>"></td>
-                            <td style="max-width: 10%!important;">
+                            <td hidden="hidden" style="max-width: 10%!important;"><input style="width: 100%!important;" <?php if($level < 3): ?> disabled <?php endif; ?> type="number" id="desconto_<?= $key['id']; ?>" class="form-kwanzar" min="0" max="100000000000000000000000" value="<?= $Emanuel; ?>" placeholder="Desconto"></td>
+                            <td hidden="hidden" style="max-width: 10%!important;"><input style="width: 100%!important;" type="hidden" id="taxa_<?= $key['id']; ?>" class="form-kwanzar" disabled value="<?= $key['id_iva']; ?>" placeholder="Taxa de imposto"><?= $key['iva']; ?></td>
+                            <td hidden="hidden" style="max-width: 20%!important;"><input hidden="hidden" style="width: 100%!important;" type="number" class="form-kwanzar" id="quantidade_<?= $key['id']; ?>" min="1" value="1"></td>
+                            <td style="max-width: 10%!important;"><?= $NnM; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td style="max-width: 10%!important;"><?= number_format($preco, 2, ",", ".")?><input hidden="hidden" style="width: 100%!important;" type="text" class="form-kwanzar" id="preco_<?= $key['id']; ?>" disabled value="<?= $preco; ?>"></td>
+                            <td hidden="hidden" style="max-width: 1%!important;"><input type="hidden" value="<?= $userlogin['id']; ?>" id="session_id_<?= $key['id']; ?>"></td>
+                            <td hidden="hidden" style="max-width: 1%!important;"><input type="hidden" value="<?= $id_db_settings; ?>" id="id_db_settings_<?= $key['id']; ?>"></td>
+                            <td hidden="hidden" style="max-width: 10%!important;">
                                 <span><?= $key['local_product']; ?></span>
                             </td>
-                            <td style="max-width: 10%!important;">
+                            <td hidden="hidden" style="max-width: 10%!important;">
                                 <span><?= $key['remarks']; ?></span>
                             </td>
                             <td style="max-width: 15%!important;"><a href="javascript:void()" onclick="adicionar(<?= $key['id']; ?>)" class="btn btn-default btn-sm"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" /><line x1="12" y1="11" x2="12" y2="17" /><line x1="9" y1="14" x2="15" y2="14" /></svg></a></td>
                         </tr>
                         <?php
+                        endif;
                     endif;
                 endforeach;
             else:
@@ -1904,6 +1748,8 @@ LIMIT 50");
 
             break;
         case 'loadingPOS':
+            $page_found = $_POST['page_found'];
+
             $NnM = 0;
             $a = 1;
             $read = new Read();
@@ -1913,21 +1759,24 @@ LIMIT 50");
                 foreach($read->getResult() as $key):
                     if($key['ILoja'] == 2 || $key['ILoja'] == null || $key['ILoja'] == '' || $key['ILoja'] != 1):
 
-                        $promocao = explode("-", $key['data_fim_promocao']);
-                        if($promocao[0] >= date('Y')):
-                            if($promocao[1] >= date('m')):
-                                if($promocao[2] >= date('d')):
-                                    $preco = $key['preco_promocao'];
+                        if(isset($promocao) && !empty($promocao)):
+                            $promocao = explode("-", $key['data_fim_promocao']);
+                            if($promocao[0] >= date('Y')):
+                                if($promocao[1] >= date('m')):
+                                    if($promocao[2] >= date('d')):
+                                        $preco = $key['preco_promocao'];
+                                    else:
+                                        $preco = $key['preco_promocao'];
+                                    endif;
                                 else:
                                     $preco = $key['preco_promocao'];
                                 endif;
-                            else:
-                                $preco = $key['preco_promocao'];
+                            elseif($promocao[0] < date('Y')):
+                                $preco = $key['preco_venda'];
                             endif;
-                        elseif($promocao[0] < date('Y')):
+                        else:
                             $preco = $key['preco_venda'];
                         endif;
-
                         $DB = new DBKwanzar();
                         /**if($DB->CheckCpanelAndSettings($id_db_settings)['atividade'] == 1 || $DB->CheckCpanelAndSettings($id_db_settings)['atividade'] == 4):
                             $NnM = $key['quantidade'];
@@ -1948,6 +1797,24 @@ LIMIT 50");
                         else:
                             $alertY = "bg-success";
                         endif;
+
+                        if($page_found != "proforma"):
+                        ?>
+                        <li>
+                            <input type="hidden" id="codigo_barras_<?= $key['id']; ?>" disabled value="<?= $key['codigo_barras']; ?>"><?=  $key['codigo_barras']; ?>
+                            <input hidden="hidden" style="width: 60%!important;" type="number" id="desconto_<?= $key['id']; ?>" class="form-kwanzar" min="0" max="100000000000000000000000" value="<?= $Emanuel; ?>" placeholder="Desconto">
+                            <input style="width: 100%!important;" type="hidden" id="taxa_<?= $key['id']; ?>" class="form-kwanzar" disabled value="<?= $key['id_iva']; ?>" placeholder="Taxa de imposto">
+                            <input hidden="hidden" type="text" class="form-kwanzar" id="preco_<?= $key['id']; ?>" disabled value="<?= $preco; ?>">
+                            <input hidden="hidden" style="width: 100%!important;" type="number" class="form-kwanzar" id="quantidade_<?= $key['id']; ?>" min="1" value="1">
+                            <input type="hidden" value="<?= $userlogin['id']; ?>" id="session_id_<?= $key['id']; ?>">
+                            <input type="hidden" value="<?= $id_db_settings; ?>" id="id_db_settings_<?= $key['id']; ?>">
+
+                            <a href="javascript:void()" onclick="adicionar(<?= $key['id']; ?>)"><img src="uploads/<?php if($key["cover"] == null || !isset($key["cover"])): echo 'default.jpg'; else: echo $key["cover"]; endif; ?>"/>
+                            <span><?= $key['product']; ?></span>
+                                <label><?= $key['quantidade']; ?></label></a>
+                        </li>
+                        <?php
+                        else:
                         ?>
                         <tr style="border-bottom: 1px solid #000!important;">
                             <td hidden="hidden"><span class="badge <?= $alertY; ?> me-1"></span></td>
@@ -1956,30 +1823,31 @@ LIMIT 50");
                             <td hidden="hidden">
                                 <input type="hidden" id="codigo_barras_<?= $key['id']; ?>" disabled value="<?= $key['codigo_barras']; ?>"><?=  $key['codigo_barras']; ?>
                             </td>
-                            <td style="max-width: 10%!important;">
+                            <td hidden="hidden" style="max-width: 10%!important;">
                                 <input style="width: 60%!important;" type="number" id="desconto_<?= $key['id']; ?>" class="form-kwanzar" min="0" max="100000000000000000000000" value="<?= $Emanuel; ?>" placeholder="Desconto">
                             </td>
-                            <td style="max-width: 10%!important;">
+                            <td hidden="hidden" style="max-width: 10%!important;">
                                 <input style="width: 100%!important;" type="hidden" id="taxa_<?= $key['id']; ?>" class="form-kwanzar" disabled value="<?= $key['id_iva']; ?>" placeholder="Taxa de imposto"><?= $key['iva']; ?>
+                            </td>
+                            <td style="max-width: 10%!important;"><?= $NnM; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td hidden="hidden" style="max-width: 10%!important;">
+                                <input hidden="hidden" style="width: 100%!important;" type="number" class="form-kwanzar" id="quantidade_<?= $key['id']; ?>" min="1" value="1"><br/>
+                                <center><span style="font-size: 11pt!important;"><?= $NnM; ?></span></center>
                             </td>
                             <td style="max-width: 20%!important;">
                                 <?= number_format($preco, 2, ",", ".")?>
                                 <input hidden="hidden" type="text" class="form-kwanzar" id="preco_<?= $key['id']; ?>" disabled value="<?= $preco; ?>">
                             </td>
-                            <td style="max-width: 10%!important;">
-                                <input style="width: 100%!important;" type="number" class="form-kwanzar" id="quantidade_<?= $key['id']; ?>" min="1" value="1"><br/>
-                                <center>Exis.: <span style="font-size: 11pt!important;"><?= $NnM; ?></span></center>
-                            </td>
-                            <td style="max-width: 1%!important;">
+                            <td hidden="hidden" style="max-width: 1%!important;">
                                 <input type="hidden" value="<?= $userlogin['id']; ?>" id="session_id_<?= $key['id']; ?>">
                             </td>
-                            <td style="max-width: 1%!important;">
+                            <td hidden="hidden" style="max-width: 1%!important;">
                                 <input type="hidden" value="<?= $id_db_settings; ?>" id="id_db_settings_<?= $key['id']; ?>">
                             </td>
-                            <td  hidden="hidden">
+                            <td hidden="hidden" hidden="hidden">
                                 <span><?= $key['local_product']; ?></span>
                             </td>
-                            <td  hidden="hidden">
+                            <td hidden="hidden" hidden="hidden">
                                 <span><?= $key['remarks']; ?></span>
                             </td>
                             <td style="max-width: 15%!important;">
@@ -1989,6 +1857,7 @@ LIMIT 50");
                             </td>
                         </tr>
                         <?php
+                        endif;
                     endif;
                 endforeach;
             endif;

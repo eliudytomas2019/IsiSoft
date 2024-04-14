@@ -69,20 +69,14 @@
                                     <label class="form-label">Módulos</label>
                                     <div class="input-group input-group-flat">
                                         <select id="modulos" name="modulos" class="form-control">
-                                            <option value="" selected>-- SELECIONE O MÓDULO --</option>
                                             <option value="1">Facturação & Stock</option>
-                                            <option value="2">Restaurantes</option>
-                                            <option value="3">Facturação</option>
-                                            <option value="4">Gestão Mecânica</option>
-                                            <option value="5">Gestão de Patrimonio</option>
-                                            <option value="9">Facturação & Stock + Extras</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col-6">
-                                    <label class="form-label">Empresas/Negócios</label>
+                                    <label class="form-label">Nº de Empresas/Negócios</label>
                                     <div class="input-group input-group-flat">
                                         <input type="text" value="<?php if (!empty($ClienteData['empresas'])) echo $ClienteData['empresas']; ?>" class="form-control ps-1" name="empresas" placeholder="Empresas/Negócios">
                                     </div>

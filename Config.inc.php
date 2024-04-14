@@ -46,6 +46,7 @@ function WSError($ErrMsg, $ErrNo, $ErrDie = null){
     endif;
 }
 
+
 function PHPError($ErrNo, $ErrMsg, $ErrFile, $ErrLine){
     $CssClass = ($ErrNo == E_USER_NOTICE ? WS_INFOR : ($ErrNo == E_USER_WARNING ? WS_ALERT : WS_ERROR));
 

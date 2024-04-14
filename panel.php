@@ -57,6 +57,8 @@ endif;
     <link rel="stylesheet" href="_disk/css/Odontograma.css" />
     <link rel="icon" href="uploads/<?= $Index['icon']; ?>"/>
 
+    <link rel="stylesheet" href="_disk/css/IsiSoft.css"/>
+
     <link href="dist/css/select2.min.css" rel="stylesheet" />
     <script src="tinymce/tinymce.min.js" referrerpolicy="origin"></script>
     <script>tinymce.init({selector:'textarea#obs, textarea#Description, textarea#testemunho, textarea#coordenadas, textarea#content, textarea#description'});</script>

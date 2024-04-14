@@ -453,6 +453,28 @@ $(document).ready(function (){
                     "&id_db_settings="+id_db_settings,
                 success: function(r){
                     $('#RealNigga').html(r);
+
+                    var t_sub = document.getElementById("t_sub").value;
+                    var t_desconto = document.getElementById("t_desconto").value;
+                    var t_imposto = document.getElementById("t_imposto").value;
+                    var t_geral = document.getElementById("t_geral").value;
+                    var t_retencao = document.getElementById("t_retencao").value;
+
+                    $.ajax({
+                        url: "./KwanzarApp/SystemApp/POS.inc.php",
+                        type: "POST",
+                        data: "acao=Niver"+
+                            "&t_sub="+t_sub+
+                            "&t_desconto="+t_desconto+
+                            "&t_imposto="+t_imposto+
+                            "&t_retencao="+t_retencao+
+                            "&t_geral="+t_geral+
+                            "&id_db_settings="+id_db_settings+
+                            "&id_user="+id_user,
+                        success: function(eu){
+                            $('#Niver').html(eu);
+                        }
+                    });
                 }
             });
         }
@@ -487,6 +509,28 @@ $(document).ready(function (){
                     "&id_db_settings="+id_db_settings,
                 success: function(r){
                     $('#RealNigga').html(r);
+
+                    var t_sub = document.getElementById("t_sub").value;
+                    var t_desconto = document.getElementById("t_desconto").value;
+                    var t_imposto = document.getElementById("t_imposto").value;
+                    var t_geral = document.getElementById("t_geral").value;
+                    var t_retencao = document.getElementById("t_retencao").value;
+
+                    $.ajax({
+                        url: "./KwanzarApp/SystemApp/POS.inc.php",
+                        type: "POST",
+                        data: "acao=Niver"+
+                            "&t_sub="+t_sub+
+                            "&t_desconto="+t_desconto+
+                            "&t_imposto="+t_imposto+
+                            "&t_retencao="+t_retencao+
+                            "&t_geral="+t_geral+
+                            "&id_db_settings="+id_db_settings+
+                            "&id_user="+id_user,
+                        success: function(eu){
+                            $('#Niver').html(eu);
+                        }
+                    });
                 }
             });
         }
@@ -520,6 +564,28 @@ $(document).ready(function (){
                     "&id_db_settings="+id_db_settings,
                 success: function(r){
                     $('#RealNigga').html(r);
+
+                    var t_sub = document.getElementById("t_sub").value;
+                    var t_desconto = document.getElementById("t_desconto").value;
+                    var t_imposto = document.getElementById("t_imposto").value;
+                    var t_geral = document.getElementById("t_geral").value;
+                    var t_retencao = document.getElementById("t_retencao").value;
+
+                    $.ajax({
+                        url: "./KwanzarApp/SystemApp/POS.inc.php",
+                        type: "POST",
+                        data: "acao=Niver"+
+                            "&t_sub="+t_sub+
+                            "&t_desconto="+t_desconto+
+                            "&t_imposto="+t_imposto+
+                            "&t_retencao="+t_retencao+
+                            "&t_geral="+t_geral+
+                            "&id_db_settings="+id_db_settings+
+                            "&id_user="+id_user,
+                        success: function(eu){
+                            $('#Niver').html(eu);
+                        }
+                    });
                 }
             });
         }
@@ -553,6 +619,28 @@ $(document).ready(function (){
                     "&id_db_settings="+id_db_settings,
                 success: function(r){
                     $('#RealNigga').html(r);
+
+                    var t_sub = document.getElementById("t_sub").value;
+                    var t_desconto = document.getElementById("t_desconto").value;
+                    var t_imposto = document.getElementById("t_imposto").value;
+                    var t_geral = document.getElementById("t_geral").value;
+                    var t_retencao = document.getElementById("t_retencao").value;
+
+                    $.ajax({
+                        url: "./KwanzarApp/SystemApp/POS.inc.php",
+                        type: "POST",
+                        data: "acao=Niver"+
+                            "&t_sub="+t_sub+
+                            "&t_desconto="+t_desconto+
+                            "&t_imposto="+t_imposto+
+                            "&t_retencao="+t_retencao+
+                            "&t_geral="+t_geral+
+                            "&id_db_settings="+id_db_settings+
+                            "&id_user="+id_user,
+                        success: function(eu){
+                            $('#Niver').html(eu);
+                        }
+                    });
                 }
             });
         }
@@ -584,6 +672,28 @@ $(document).ready(function (){
                     "&id_db_settings="+id_db_settings,
                 success: function(r){
                     $('#RealNigga').html(r);
+
+                    var t_sub = document.getElementById("t_sub").value;
+                    var t_desconto = document.getElementById("t_desconto").value;
+                    var t_imposto = document.getElementById("t_imposto").value;
+                    var t_geral = document.getElementById("t_geral").value;
+                    var t_retencao = document.getElementById("t_retencao").value;
+
+                    $.ajax({
+                        url: "./KwanzarApp/SystemApp/POS.inc.php",
+                        type: "POST",
+                        data: "acao=Niver"+
+                            "&t_sub="+t_sub+
+                            "&t_desconto="+t_desconto+
+                            "&t_imposto="+t_imposto+
+                            "&t_retencao="+t_retencao+
+                            "&t_geral="+t_geral+
+                            "&id_db_settings="+id_db_settings+
+                            "&id_user="+id_user,
+                        success: function(eu){
+                            $('#Niver').html(eu);
+                        }
+                    });
                 }
             });
         }
@@ -615,6 +725,28 @@ $(document).ready(function (){
                     "&id_db_settings="+id_db_settings,
                 success: function(r){
                     $('#RealNigga').html(r);
+
+                    var t_sub = document.getElementById("t_sub").value;
+                    var t_desconto = document.getElementById("t_desconto").value;
+                    var t_imposto = document.getElementById("t_imposto").value;
+                    var t_geral = document.getElementById("t_geral").value;
+                    var t_retencao = document.getElementById("t_retencao").value;
+
+                    $.ajax({
+                        url: "./KwanzarApp/SystemApp/POS.inc.php",
+                        type: "POST",
+                        data: "acao=Niver"+
+                            "&t_sub="+t_sub+
+                            "&t_desconto="+t_desconto+
+                            "&t_imposto="+t_imposto+
+                            "&t_retencao="+t_retencao+
+                            "&t_geral="+t_geral+
+                            "&id_db_settings="+id_db_settings+
+                            "&id_user="+id_user,
+                        success: function(eu){
+                            $('#Niver').html(eu);
+                        }
+                    });
                 }
             });
         }
@@ -1001,12 +1133,14 @@ $(document).ready(function (){
 
     $('#SearchProduct').keyup(function(){
         var searching = $(this).val(),
-            SearchProduct01 = $("#SearchProduct01").val();
+            SearchProduct01 = $("#SearchProduct01").val(),
+            page_found = $("#page_found").val();
 
         $.ajax({
             url: './KwanzarApp/SystemApp/POS.inc.php',
             type: 'POST',
             data: 'acao=SearchProduct'+
+                "&page_found="+page_found+
                 "&SearchProduct="+searching+
                 "&SearchProduct01="+SearchProduct01+
                 "&id_user="+id_user+
@@ -1021,13 +1155,15 @@ $(document).ready(function (){
 
     $('#SearchProduct01').keyup(function(){
         var searching = $(this).val(),
-            SearchProduct = $("#SearchProduct").val();
+            SearchProduct = $("#SearchProduct").val(),
+            page_found = $("#page_found").val();
 
 
         $.ajax({
             url: './KwanzarApp/SystemApp/POS.inc.php',
             type: 'POST',
             data: 'acao=SearchProduct'+
+                "&page_found="+page_found+
                 "&SearchProduct01="+searching+
                 "&SearchProduct="+SearchProduct+
                 "&id_user="+id_user+
@@ -1421,14 +1557,14 @@ function FinalizarVenda(){
     var id_db_kwanzar = document.getElementById("id_db_kwanzar").value;
     var id_db_settings = document.getElementById('id_db_settings').value;
     var id_user        = document.getElementById('id_user').value;
-    var pagou          = document.getElementById('pagou').value;
-    var troco          = document.getElementById('troco').value;
+    /**var pagou          = document.getElementById('pagou').value;
+    var troco          = document.getElementById('troco').value;**/
     var level          = document.getElementById('level').value;
 
-    var cartao_de_debito   = document.getElementById('cartao_de_debito').value;
+    /***var cartao_de_debito   = document.getElementById('cartao_de_debito').value;
     var transferencia      = document.getElementById('transferencia').value;
     var numerario          = document.getElementById('numerario').value;
-    var all_total          = document.getElementById('all_total').value;
+    var all_total          = document.getElementById('all_total').value;**/
 
     if(confirm('Desejas salvar permanentemente a venda?')){
         $.ajax({
@@ -1439,13 +1575,7 @@ function FinalizarVenda(){
                 "&level="+level+
                 "&id_db_kwanzar="+id_db_kwanzar+
                 "&id_db_settings="+id_db_settings+
-                "&id_user="+id_user+
-                "&pagou="+pagou+
-                "&cartao_de_debito="+cartao_de_debito+
-                "&transferencia="+transferencia+
-                "&numerario="+numerario+
-                "&all_total="+all_total+
-                "&troco="+troco,
+                "&id_user="+id_user,
             beforeSend: function(object){
                 $("#sd_billing").html("Mensagem: "+object);
             }, success: function(r){
@@ -1462,6 +1592,28 @@ function FinalizarVenda(){
                         "&id_user="+id_user,
                     success: function(eu){
                         $('#RealNigga').html(eu);
+
+                        var t_sub = document.getElementById("t_sub").value;
+                        var t_desconto = document.getElementById("t_desconto").value;
+                        var t_imposto = document.getElementById("t_imposto").value;
+                        var t_geral = document.getElementById("t_geral").value;
+                        var t_retencao = document.getElementById("t_retencao").value;
+
+                        $.ajax({
+                            url: "./KwanzarApp/SystemApp/POS.inc.php",
+                            type: "POST",
+                            data: "acao=Niver"+
+                                "&t_sub="+t_sub+
+                                "&t_desconto="+t_desconto+
+                                "&t_imposto="+t_imposto+
+                                "&t_retencao="+t_retencao+
+                                "&t_geral="+t_geral+
+                                "&id_db_settings="+id_db_settings+
+                                "&id_user="+id_user,
+                            success: function(eu){
+                                $('#Niver').html(eu);
+                            }
+                        });
                     }
                 });
 
@@ -1504,8 +1656,8 @@ function FinalizarProforma(){
     var id_db_kwanzar = document.getElementById("id_db_kwanzar").value;
     var id_db_settings = document.getElementById('id_db_settings').value;
     var id_user        = document.getElementById('id_user').value;
-    var pagou          = document.getElementById('pagou').value;
-    var troco          = document.getElementById('troco').value;
+    /**var pagou          = document.getElementById('pagou').value;
+    var troco          = document.getElementById('troco').value;*/
     var level          = document.getElementById('level').value;
 
     if(confirm('Desejas salvar permanentemente a proforma?')){
@@ -1517,9 +1669,7 @@ function FinalizarProforma(){
                 "&level="+level+
                 "&id_db_kwanzar="+id_db_kwanzar+
                 "&id_db_settings="+id_db_settings+
-                "&id_user="+id_user+
-                "&pagou="+pagou+
-                "&troco="+troco,
+                "&id_user="+id_user,
             beforeSend: function(object){
                 $("#sd_billing").html("Mensagem: "+object);
             }, success: function(r){
@@ -1537,6 +1687,28 @@ function FinalizarProforma(){
                     success: function(eu){
                         //alert(eu);
                         $('#RealNigga').html(eu);
+
+                        var t_sub = document.getElementById("t_sub").value;
+                        var t_desconto = document.getElementById("t_desconto").value;
+                        var t_imposto = document.getElementById("t_imposto").value;
+                        var t_retencao = document.getElementById("t_retencao").value;
+                        var t_geral = document.getElementById("t_geral").value;
+
+                        $.ajax({
+                            url: "./KwanzarApp/SystemApp/POS.inc.php",
+                            type: "POST",
+                            data: "acao=Niver"+
+                                "&t_sub="+t_sub+
+                                "&t_desconto="+t_desconto+
+                                "&t_imposto="+t_imposto+
+                                "&t_retencao="+t_retencao+
+                                "&t_geral="+t_geral+
+                                "&id_db_settings="+id_db_settings+
+                                "&id_user="+id_user,
+                            success: function(eu){
+                                $('#Niver').html(eu);
+                            }
+                        });
                     }
                 });
 
@@ -1698,6 +1870,28 @@ function RemovePS(id){
                 $("#RealNigga").html("Mensagem: "+object);
             }, success: function(r){
                 $("#RealNigga").html(r);
+
+                var t_sub = document.getElementById("t_sub").value;
+                var t_desconto = document.getElementById("t_desconto").value;
+                var t_imposto = document.getElementById("t_imposto").value;
+                var t_geral = document.getElementById("t_geral").value;
+                var t_retencao = document.getElementById("t_retencao").value;
+
+                $.ajax({
+                    url: "./KwanzarApp/SystemApp/POS.inc.php",
+                    type: "POST",
+                    data: "acao=Niver"+
+                        "&t_sub="+t_sub+
+                        "&t_desconto="+t_desconto+
+                        "&t_imposto="+t_imposto+
+                        "&t_retencao="+t_retencao+
+                        "&t_geral="+t_geral+
+                        "&id_db_settings="+id_db_settings+
+                        "&id_user="+id_user,
+                    success: function(eu){
+                        $('#Niver').html(eu);
+                    }
+                });
             }
         });
     }
@@ -1706,6 +1900,7 @@ function RemovePS(id){
 function loadingPOS(id_user){
     var id_db_settings = document.getElementById('id_db_settings').value;
     var level          = document.getElementById('level').value;
+    var page_found = document.getElementById("page_found").value;
     var getResult      = document.getElementById('POSET');
 
     $.ajax({
@@ -1714,6 +1909,7 @@ function loadingPOS(id_user){
         data: "acao=loadingPOS"+
             "&id_user="+id_user+
             "&level="+level+
+            "&page_found="+page_found+
             "&id_db_settings="+id_db_settings,
         success: function(result){
             $("#POSET").html(result);
@@ -1767,10 +1963,28 @@ function adicionar(id){
             $("#RealNigga").html("Mensagem: "+object);
         }, success: function(r){
             $("#RealNigga").html(r);
-            fecharModal();
-            $("#ModalsCarregarProdutos").hide();
-            $(".modal-backdrop").hide();
-            document.body.style.overflow = '';
+
+            var t_sub = document.getElementById("t_sub").value;
+            var t_desconto = document.getElementById("t_desconto").value;
+            var t_retencao = document.getElementById("t_retencao").value;
+            var t_imposto = document.getElementById("t_imposto").value;
+            var t_geral = document.getElementById("t_geral").value;
+
+            $.ajax({
+                url: "./KwanzarApp/SystemApp/POS.inc.php",
+                type: "POST",
+                data: "acao=Niver"+
+                    "&t_sub="+t_sub+
+                    "&t_desconto="+t_desconto+
+                    "&t_imposto="+t_imposto+
+                    "&t_retencao="+t_retencao+
+                    "&t_geral="+t_geral+
+                    "&id_db_settings="+id_db_settings+
+                    "&id_user="+id_user,
+                success: function(eu){
+                    $('#Niver').html(eu);
+                }
+            });
         }
     });
 }

@@ -15,6 +15,8 @@
     $So          = 0;
     $p = array();
 
+    $total_service = 0;
+
     $n1 = "sd_retification";
     $n2 = "sd_retification_pmp";
 
@@ -33,7 +35,7 @@
 
     if($read->getResult()):
         $k = $read->getResult()[0];
-        POS::Timers($k['numero'], $InvoiceType);
+        //POS::Timers($k['numero'], $InvoiceType);
     ?>
     <div class="header">
         <img src="./uploads/<?php if($k['settings_logotype'] == null || $k['settings_logotype'] == null): echo $Index['logotype']; else: echo $k['settings_logotype']; endif;  ?>" class="img-silvio"/>
@@ -128,6 +130,9 @@
                 require("./_SystemWoW/Calc_Impostos.inc.php");
 
                 $value_01 = $value + $iva;
+                if($key['product_type'] == "S"):
+                    $total_service += $value;
+                endif;
                 ?>
                 <tr style="border-bottom: 1px solid #000!important;">
                     <td style="border-bottom: 1px solid #000!important;"><?= $key['product_code']; ?></td>
@@ -138,10 +143,10 @@
                         <small><?= $key['product_list']; ?></small>
                     </td>
                     <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($key['quantidade_pmp'], 2)) ?></td>
-                    <td v><?= str_replace(",", ".", number_format($key['preco_pmp'], 2));  ?></td>
+                    <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($key['preco_pmp'], 2));  ?></td>
                     <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($key['desconto_pmp'], 2));  ?></td>
                     <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($key['taxa'], 2));  ?>  <?php if(DBKwanzar::CheckConfig($id_db_settings) == false || DBKwanzar::CheckConfig($id_db_settings)['PadraoAGT'] == null || DBKwanzar::CheckConfig($id_db_settings)['PadraoAGT'] == 2): ?><?php if($key['taxa'] == 0): echo "(".$key['TaxExemptionCode'].")"; endif; ?><?php endif; ?></td>
-                    <td><?= str_replace(",", ".", number_format($value_01, 2));  ?></td>
+                    <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($value_01, 2));  ?></td>
                 </tr>
             <?php
             endforeach;
@@ -157,8 +162,14 @@
         </div>
     </div>
     <?php
+        if($k['IncluirNaFactura'] == 2):
+            $Retencao = ($total_service * $k['RetencaoDeFonte']) / 100;
+        else:
+            $Retencao = 0;
+        endif;
+
         $descont_f = ($total_preco * $k['settings_desc_financ']) / 100;
-        $total_geral = ($total_valor - ($descont_f + $total_desconto)) + $totol_iva;
+        $total_geral = ($total_valor - ($descont_f + $total_desconto + $Retencao)) + $totol_iva;
     ?>
     <div class="footer-small">
         <div class="cripton-silvio">
@@ -177,20 +188,25 @@
             </div>
 
             <div class="cripton-silvio-b">
-                <table class="spec"  style="border: 1px solid #000!important;">
-                    <tr style="border-bottom: 1px solid #000!important;"><td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Total Ilíquido</td> <td style="border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($total_preco, 2)); ?></td></tr>
-                    <tr style="border-bottom: 1px solid #000!important;"><td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Desconto Comercial</td> <td style="border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($total_desconto, 2));  ?></td></tr>
-                    <tr style="border-bottom: 1px solid #000!important;"><td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Desconto Financeiro (<?= str_replace(",", ".", number_format($k['settings_desc_financ'], 1)); ?>%)</td> <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".",number_format($descont_f, 2)); ?></td></tr>
-                    <tr style="border-bottom: 1px solid #000!important;"><td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Total de Imposto</td> <td style="border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($totol_iva, 2)); ?></td></tr>
+                <table class="spec">
+                    <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-left: 1px solid #000!important;border-top: 1px solid #000!important;border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Total Ilíquido</td> <td style="border-right: 1px solid #000!important;border-top: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($total_preco, 2)); ?></td></tr>
+                    <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Desconto Comercial</td> <td style="border-right: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($total_desconto, 2));  ?></td></tr>
+                    <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Desconto Financeiro</td> <td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?= str_replace(",", ".",number_format($descont_f, 2)); ?></td></tr>
+                    <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Total de Imposto</td> <td style="border-right: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?php echo str_replace(",", ".", number_format($totol_iva, 2)); ?></td></tr>
                     <?php if($k['method'] == 'NU' && $k['InvoiceType'] != 'PP'): ?>
                         <tr style="border-bottom: 1px solid #000!important;"><td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Pagou</td> <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($p['pagou'] ,2)); ?></td></tr>
                         <tr><td style="border-bottom: 1px solid #000!important;border-right: 1px solid #000!important;">Troco</td> <td style="border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($p['troco'] ,2)); ?></td></tr>
                     <?php endif; ?>
+                    <tr style="border-left: 1px solid #000!important;border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Ret. Fonte (<?= str_replace(",", ".", number_format($k['RetencaoDeFonte'], 1)) ?>%)</td> <td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?php if($k['IncluirNaFactura'] == 2): ?><?php echo number_format($Retencao, 2);  ?><?php  endif; ?></td></tr>
+                    <tr style="border-bottom: 1px solid #000!important;"><td style="border-right: 1px solid #000!important;border-left: 1px solid #000!important;border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;">Total a Pagar (<?= $k['settings_moeda']; ?>): </td> <td style="border-right: 1px solid #000!important;border-bottom: 1px solid #000!important;"><?= str_replace(",", ".", number_format($total_geral ,2)); ?></td></tr>
                 </table>
-
-                <div class="total-silvio">
-                    <p>Total (<?= $k['settings_moeda']; ?>) <?= str_replace(",", ".", number_format($total_geral ,2)); ?></p>
-                </div>
+                <p style="font-size: 10pt!important;font-weight: bold!important;">
+                    <?php
+                    $fxs = new NumberFormatter("pt_BR", NumberFormatter::SPELLOUT);
+                    $word = $fxs->format($total_geral);
+                    echo $word." kwanzas ";
+                    ?>
+                </p>
             </div>
         </div>
     </div>

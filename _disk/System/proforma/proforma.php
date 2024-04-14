@@ -5,69 +5,103 @@ if(!$Read->getResult() || !$Read->getRowCount()):
     header("Location: panel.php?exe=settings/System_Settings{$n}");
 endif;
 ?>
-<div class="row row-cards">
-    <?php
-    include_once("_disk/IncludesApp/ModalsCarregarProdutos.inc.php"); ?>
-    <div class="col-lg-1" style="display: flex!important;flex-direction: column!important;">
-        <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal">
-          Novo Cliente
-        </a>
-        <br/><a class="btn btn-primary btn-sm" <?php $Read->ExeRead("db_users_settings", "WHERE id_db_settings=:i ", "i={$id_db_settings}"); if(!$Read->getResult() || !$Read->getRowCount()): ?> href="panel.php?exe=settings/account_configurations<?= $n; ?>" <?php else:?> href="javascript:void" data-bs-toggle="modal" data-bs-target="#ModalsCarregarDocumentosProformas" <?php endif; ?>>
-            Imprimir
-        </a>
-    </div>
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="modal-title">Emissão de Proforma</h5>
-            </div>
-            <div class="card-body" id="RealNigga">
+
+<div id="content">
+    <div id="content-one">
+        <div class="Read-customer">
+            <label>Nome do Cliente:</label>
+            <?php
+            $stp = 1;
+
+            $ReadLn = new Read();
+            $ReadLn->ExeRead("sd_billing", "WHERE id_db_settings=:i AND session_id=:ip AND page_found=:ppY AND status=:stp", "i={$id_db_settings}&ip={$id_user}&ppY={$page_found}&stp={$stp}");
+
+            $DataSupplier = filter_input(INPUT_POST, FILTER_DEFAULT);
+
+            if($ReadLn->getResult()):
+                $DataSupplier = $ReadLn->getResult()[0];
+            endif;
+            ?>
+            <select id="customer" onclick="SelectVeiculoII()" onselect="SelectVeiculoII()" onchange="SelectVeiculoII()" class="form-control">
                 <?php
-                require_once("_disk/Helps/table-product-pos-settings.inc.php"); ?>
-            </div>
+                $read = new Read();
+                $read->ExeRead("cv_customer", "WHERE id_db_settings=:i ORDER BY id ASC", "i={$id_db_settings}");
+                if($read->getResult()):
+                    foreach ($read->getResult() as $Supplier):
+                        extract($Supplier);
+                        ?>
+                        <option value="<?= $Supplier['id']; ?>" <?php if(isset($DataSupplier['id_customer']) && $DataSupplier['id_customer'] == $Supplier['id']) echo 'selected="selected"'; ?>><?= $Supplier['nome']; ?></option>
+                    <?php
+                    endforeach;
+                else:
+                    WSError("Oppsss! Não encontramos nenhum Cliente, cadastre um para prosseguir!", WS_ALERT);
+                endif;
+                ?>
+            </select>
+            <a href="" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal">Novo cliente</a>
         </div>
 
-        <br/><div class="card">
-            <div class="card-header">
-                <h5 class="modal-title">Dados da Proforma</h5>
+        <div class="content-space-itens" id="RealNigga">
+            <div id="OnCheckBox"></div>
+            <div id="AnaJulia"></div>
+            <?php
+            require_once("_disk/Helps/table-product-pos-settings.inc.php");
+            ?>
+        </div>
+
+        <div class="content-wave">
+            <div class="content-wave-one">
+                <div class="Read-wave">
+                    <label>Forma de Pagamento: </label>
+                    <select class="form-control" id="method">
+                        <option value="CD" <?php if(isset($DataSupplier['method']) && $DataSupplier['method'] == "CD"): echo 'selected="selected"'; elseif(DBKwanzar::CheckConfig($id_db_settings)['MethodDefault'] == null || isset(DBKwanzar::CheckConfig($id_db_settings)['MethodDefault']) && DBKwanzar::CheckConfig($id_db_settings)['MethodDefault'] == 2): echo "selected"; endif; ?>>Cartão de Debito</option>
+                        <option value="NU" <?php if(isset($DataSupplier['method']) && $DataSupplier['method'] == "NU"): echo 'selected="selected"'; elseif(DBKwanzar::CheckConfig($id_db_settings)['MethodDefault'] == null || isset(DBKwanzar::CheckConfig($id_db_settings)['MethodDefault']) && DBKwanzar::CheckConfig($id_db_settings)['MethodDefault'] == 1): echo "selected"; endif; ?>>Numerário</option>
+                        <option value="TB" <?php if(isset($DataSupplier['method']) && $DataSupplier['method'] == "TB") echo 'selected="selected"'; ?>>Transferência Bancária</option>
+                        <option value="MB" <?php if(isset($DataSupplier['method']) && $DataSupplier['method'] == "MB") echo 'selected="selected"'; ?>>Referência de pagamentos para Multicaixa</option>
+                        <option value="OU" <?php if(isset($DataSupplier['method']) && $DataSupplier['method'] == "OU") echo 'selected="selected"'; ?>>Outros Meios Aqui não Assinalados</option>
+                    </select>
+                </div>
+                <div class="Read-wave">
+                    <label>Documento Comercial: </label>
+                    <select class="form-control" id="InvoiceType">
+                        <option value="PP" <?php if(isset($DataSupplier['InvoiceType']) && $DataSupplier['InvoiceType'] == "PP") echo 'selected="selected"'; ?>>PROFORMA</option>
+                    </select>
+                </div>
+                <div class="Read-btns" id="sd_billing">
+                    <?php
+                    require_once("_disk/Helps/right-proforma-settings.inc.php");
+                    ?>
+                </div>
             </div>
-            <div class="card-body" id="sd_billing">
-                <?php if($Beautiful["documentos"] > $Beautiful['documentos_feito']): ?>
-                    <?php require_once("_disk/Helps/right-proforma-settings.inc.php"); ?>
-                <?php else: ?>
-                    <label class="form-label col-form-label">Documentos: <p><?= $Beautiful['documentos_feito']." / ".$Beautiful['documentos']; ?></p></label>
-                <?php endif; ?>
+            <div class="content-wave-two">
+                <div class="MeuNiver" id="Niver">
+                    <?php require_once("_disk/Helps/Niver.inc.php"); ?>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-5">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="modal-title">Pesquisar Productos/Serviços</h5>
-            </div>
-            <div class="card-body">
-                <form method="post" action="" name = "FormCreateCustomer"  enctype="multipart/form-data">
-                    <div class="search-content-modal" style="display:flex!important;flex-direction: row!important;justify-content: space-between!important;">
-                        <input type="search" class="form-control" id="SearchProduct01" style="width: 30%!important;" placeholder="Buscar por código, código de barras."/>
-                        <input type="search" class="form-control" id="SearchProduct" style="width: 69%!important;" placeholder="Buscar por designação"/>
-                    </div><br/>
-                    <table class="table-responsive" style="font-size: 10pt!important;border: 1px solid #000!important;border-radius: 4px!important;">
-                        <thead>
-                        <tr style="border-bottom: 1px solid #000!important;">
-                            <th>Item</th>
-                            <th>Desconto(%)</th>
-                            <th>Taxa(%)</th>
-                            <th>Preço Uni.</th>
-                            <th>Qtd</th>
-                            <th>-</th>
-                        </tr>
-                        </thead>
-                        <tbody id="POSET">
+    <div id="content-two">
+        <div class="Read-wave">
+            <label>Pesquisar Produto/serviço</label>
+            <a href="?exe=product/create<?= $n ?>" target="_blank" class="btn btn-danger btn-sm">Novo Produto/serviço</a>
+        </div>
+        <div class="Read-culpado">
+            <input type="search" class="form-control" id="SearchProduct01" hidden="hidden" style="width: 30%!important;" placeholder="Buscar por código, código de barras."/>
+            <input type="search" class="form-control" id="SearchProduct" style="width: 100%!important;" placeholder="Nome ou Código"/>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Descrição do Produto/serviço</th>
+                    <th>Qtd</th>
+                    <th>Preço Uni.</th>
+                    <th>-</th>
+                </tr>
+            </thead>
+        </table>
 
-                        </tbody>
-                    </table>
-                </form>
-            </div>
+        <div id="POSET" class="MoPaz">
+
         </div>
     </div>
 </div>

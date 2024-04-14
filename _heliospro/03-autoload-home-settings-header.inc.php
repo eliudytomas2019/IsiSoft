@@ -125,7 +125,7 @@ if($Read->getResult()):
     endforeach;
 endif;
 
-if(DBKwanzar::CheckConfig($id_db_settings)['cambio_x_preco'] == 1 && !empty(DBKwanzar::CheckConfig($id_db_settings)['cambio_atual']) && DBKwanzar::CheckConfig($id_db_settings)['porcentagem_x_cambio'] > 0):
+if(DBKwanzar::CheckConfig($id_db_settings)['cambio_x_preco'] == 1):
     $Product = new Product();
     $Product->ExeUpdateCambio($id_db_settings);
 

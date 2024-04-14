@@ -77,20 +77,14 @@
                                     <label class="form-label">Módulos</label>
                                     <div class="input-group input-group-flat">
                                         <select id="modulos" name="modulos" class="form-control">
-                                            <option value="" selected>-- SELECIONE O MÓDULO --</option>
                                             <option value="1" <?php if (isset($ClienteData['modulos']) && $ClienteData['modulos'] == 1) echo 'selected="selected"'; ?>>Facturação & Stock</option>
-                                            <option value="2" <?php if (isset($ClienteData['modulos']) && $ClienteData['modulos'] == 2) echo 'selected="selected"'; ?>>Restaurantes</option>
-                                            <option value="3" <?php if (isset($ClienteData['modulos']) && $ClienteData['modulos'] == 3) echo 'selected="selected"'; ?>>Facturação</option>
-                                            <option value="4" <?php if (isset($ClienteData['modulos']) && $ClienteData['modulos'] == 4) echo 'selected="selected"'; ?>>Gestão Mecânica</option>
-                                            <option value="5" <?php if (isset($ClienteData['modulos']) && $ClienteData['modulos'] == 5) echo 'selected="selected"'; ?>>Gestão de Patrimonio</option>
-                                            <option value="9" <?php if (isset($ClienteData['modulos']) && $ClienteData['modulos'] == 9) echo 'selected="selected"'; ?>>Facturação & Stock + Extras</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col-6">
-                                    <label class="form-label">Empresas/Negócios</label>
+                                    <label class="form-label">Nº de Empresas/Negócios</label>
                                     <div class="input-group input-group-flat">
                                         <input type="text" value="<?php if (!empty($ClienteData['empresas'])) echo $ClienteData['empresas']; ?>" class="form-control ps-1" name="empresas" placeholder="Empresas/Negócios">
                                     </div>

@@ -10,93 +10,32 @@ if($ReadLn->getResult()):
     $DataSupplier = $ReadLn->getResult()[0];
 endif;
 ?>
-<div class="col-lg-12">
-    <div class="row">
-        <input type="hidden" id="TaxPointDate" value="<?= date('Y-m-d'); ?>" class="form-kwanzar">
-        <div class="col-lg-6">
-            <div class="mb-3">
-                <label class="form-label">Cliente</label>
-                <select id="customer" onclick="SelectVeiculoII()" onselect="SelectVeiculoII()" onchange="SelectVeiculoII()" class="form-control">
-                    <?php
-                    $read = new Read();
-                    $read->ExeRead("cv_customer", "WHERE id_db_settings=:i ORDER BY id ASC", "i={$id_db_settings}");
-                    if($read->getResult()):
-                        foreach ($read->getResult() as $Supplier):
-                            extract($Supplier);
-                            ?>
-                            <option value="<?= $Supplier['id']; ?>" <?php if(isset($DataSupplier['id_customer']) && $DataSupplier['id_customer'] == $Supplier['id']) echo 'selected="selected"'; ?>><?= $Supplier['nome']; ?></option>
-                        <?php
-                        endforeach;
-                    else:
-                        WSError("Oppsss! Não encontramos nenhum Cliente, cadastre um para prosseguir!", WS_ALERT);
-                    endif;
-                    ?>
-                </select>
-            </div>
-        </div>
-        <input type="hidden" name="id_obs" id="id_obs" value="" class="form-control"/>
-        <input type="hidden" name="id_fabricante" id="id_fabricante"/>
-        <input type="hidden" name="id_veiculos" id="id_veiculos"/>
-        <input type="hidden" name="matriculas" id="matriculas"/>
-        <div class="col-lg-6">
-            <div class="mb-3">
-                <label class="form-label">Documento</label>
-                <select class="form-control" id="InvoiceType">
-                    <option value="PP" <?php if(isset($DataSupplier['InvoiceType']) && $DataSupplier['InvoiceType'] == "PP") echo 'selected="selected"'; ?>>PROFORMA</option>
-                </select>
-            </div>
-        </div>
-        <select class="form-control" id="SourceBilling" style="display: none!important;">
-            <option value="P" <?php if(isset($DataSupplier['SourceBilling']) && $DataSupplier['SourceBilling'] == "P") echo 'selected="selected"'; ?>>Documento produzido na aplicação;</option>
-            <?php if($level >= 3): ?>
-                <option value="M" <?php if(isset($DataSupplier['SourceBilling']) && $DataSupplier['SourceBilling'] == "M") echo 'selected="selected"'; ?>>Documento proveniente de Recuperação ou de emissão manual;</option>
-            <?php endif; ?>
-        </select>
-        <div class="col-lg-12" hidden>
-            <div class="mb-3" hidden>
-                <label hidden class="form-label">Pagamento</label>
-                <select hidden class="form-control" id="method">
-                    <option value="CD" <?php if(isset($DataSupplier['method']) && $DataSupplier['method'] == "CD"): echo 'selected="selected"'; elseif(DBKwanzar::CheckConfig($id_db_settings)['MethodDefault'] == null || isset(DBKwanzar::CheckConfig($id_db_settings)['MethodDefault']) && DBKwanzar::CheckConfig($id_db_settings)['MethodDefault'] == 2): echo "selected"; endif; ?>>Cartão de Debito</option>
-                    <option value="NU" <?php if(isset($DataSupplier['method']) && $DataSupplier['method'] == "NU"): echo 'selected="selected"'; elseif(DBKwanzar::CheckConfig($id_db_settings)['MethodDefault'] == null || isset(DBKwanzar::CheckConfig($id_db_settings)['MethodDefault']) && DBKwanzar::CheckConfig($id_db_settings)['MethodDefault'] == 1): echo "selected"; endif; ?>>Numerário</option>
-                    <option value="TB" <?php if(isset($DataSupplier['method']) && $DataSupplier['method'] == "TB") echo 'selected="selected"'; ?>>Transferência Bancária</option>
-                    <option value="MB" <?php if(isset($DataSupplier['method']) && $DataSupplier['method'] == "MB") echo 'selected="selected"'; ?>>Referência de pagamentos para Multicaixa</option>
-                    <option value="OU" <?php if(isset($DataSupplier['method']) && $DataSupplier['method'] == "OU") echo 'selected="selected"'; ?>>Outros Meios Aqui não Assinalados</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="mb-3" hidden>
-                <label class="form-label" hidden>Desconto Financeiro</label>
-                <input hidden type="number" min="0" max="100" <?php if($level < 3): ?>disabled<?php endif; ?> id="settings_desc_financ" value="<?php if(isset($DataSupplier['settings_desc_financ'])): echo $DataSupplier['settings_desc_financ']; else: echo "0"; endif; ?>" placeholder="0" class="form-control">
-            </div>
-            <div class="mb-3" hidden="hidden">
-                <label class="form-label">Referência</label>
-                <input type="text" id="referencia" name="referencia" value="<?php if(isset($DataSupplier['referencia'])): echo $DataSupplier['referencia']; else: echo "0"; endif; ?>" placeholder="Referência" class="form-control">
-            </div>
-            <div class="mb-3"><a href="javascript:void()" onclick="DadosDaFactura01()" class="btn btn-default w-100"><!-- Download SVG icon from http://tabler-icons.io/i/cloud-storm -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7h-1" /><polyline points="13 14 11 18 14 18 12 22" /></svg>Processar</a></div>
-            <i class="col-line"></i>
-            <hr/>
-            <?php
-            $suspenso = 0;
-            $status = 1;
+<input type="hidden" id="TaxPointDate" value="<?= date('Y-m-d'); ?>" class="form-kwanzar">
+<input type="hidden" name="id_obs" id="id_obs" value="0" class="form-control"/>
+<input type="hidden" name="id_fabricante" id="id_fabricante" value="0"/>
+<input type="hidden" name="id_veiculos" id="id_veiculos" value="0"/>
+<input type="hidden" name="matriculas" id="matriculas" value="0"/>
+<input type="text" hidden="hidden" id="referencia" name="referencia" value="0" placeholder="Referência" class="form-control">
+<input hidden="hidden" type="number" min="0" max="100" id="settings_desc_financ" value="0" placeholder="0" class="form-control">
+<select class="form-control" id="SourceBilling" style="display: none!important;">
+    <option value="P" <?php if(isset($DataSupplier['SourceBilling']) && $DataSupplier['SourceBilling'] == "P") echo 'selected="selected"'; ?>>Documento produzido na aplicação;</option>
+</select>
 
-            $read = new Read();
-            $read->ExeRead("sd_billing", "WHERE id_db_settings=:i AND session_id=:ses AND page_found=:ppY AND suspenso=:s AND status=:st", "i={$id_db_settings}&ses={$id_user}&ppY={$page_found}&s={$suspenso}&st={$status}");
+<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalsCarregarDocumentos">Imprimir</a>
+<?php
+$suspenso = 0;
+$status = 1;
 
-            if($read->getResult()):
-                ?>
-                <input type="hidden" id="pagou" value="0">
-                <input type="hidden" id="troco" value="0">
+$read = new Read();
+$read->ExeRead("sd_billing", "WHERE id_db_settings=:i AND session_id=:ses AND page_found=:ppY AND suspenso=:s AND status=:st", "i={$id_db_settings}&ses={$id_user}&ppY={$page_found}&s={$suspenso}&st={$status}");
 
-                <div class="mb-3">
-                    <!---a href="javascript:void" class="btn btn-warning" onclick="AnularVenda()">Suspender a venda</a--->
-                    <a href="javascript:void" class="btn btn-primary w-100" onclick="FinalizarProforma()"><!-- Download SVG icon from http://tabler-icons.io/i/location -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5" /></svg>Finalizar Proforma</a>
-                </div>
-            <?php
-            endif;
-            ?>
-        </div>
-    </div>
-</div>
+if($read->getResult()):
+    ?>
+    <a href="javascript:void" class="btn btn-primary" onclick="FinalizarProforma()">Finalizar Proforma</a>
+<?php
+else:
+    ?>
+    <a href="javascript:void()" onclick="DadosDaFactura01()" class="btn btn-default">Processar</a>
+<?php
+endif;
+?>

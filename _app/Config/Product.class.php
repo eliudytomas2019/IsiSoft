@@ -16,23 +16,58 @@ class Product{
     }
 
     public function ExeUpdateCambio($id_db_settings){
-        $this->id_db_settings = strip_tags(trim($id_db_settings));
+        unset($this->ID);
+        unset($this->Data);
+        // Limpeza de dados
+        $this->id_db_settings = filter_var($id_db_settings, FILTER_SANITIZE_STRING);
 
-        $taxa = (DBKwanzar::CheckConfig($id_db_settings)['cambio_atual'] * DBKwanzar::CheckConfig($id_db_settings)['porcentagem_x_cambio'] / 100);
+        // Verifique se a configuração existe antes de tentar acessá-la
+        $config = DBKwanzar::CheckConfig($this->id_db_settings);
+        if (!$config):
+            $this->Error = ['Configuração não encontrada', WS_INFOR];
+            $this->Result = false;
+        endif;
+
+        $taxa = ($config['cambio_atual'] * 1 / 100);
 
         $Read = new Read();
-        $Read->ExeRead(self::Entity, "WHERE id_db_settings=:id ", "id={$this->id_db_settings}");
+        $Read->ExeRead(self::Entity, "WHERE id_db_settings=:id ORDER BY id DESC", "id={$this->id_db_settings}");
 
         if($Read->getResult()):
             foreach ($Read->getResult() as $key):
-                if(empty($key['custo_compra'])):
-                    $this->Data['preco_venda'] = $taxa * 2;
-                else:
-                    $this->Data['preco_venda'] = ($key['custo_compra'] + ($key['custo_compra'] * $key['PorcentagemP']) / 100) + $taxa;
+                $old_pricing = $key['preco_venda'] + ($key['peso_bruto'] * $key['preco_venda_ii']);
+
+                // Use a função isset para verificar se a chave existe e se não está vazia
+                if(empty($key['peso_bruto']) || empty($key['preco_venda_ii'])):
+                    if(empty($key['preco_original']) && !isset($key['preco_original'])):
+                        $this->Data['preco_original'] = $key['preco_venda'] ?? null;
+                    endif;
                 endif;
 
-                if($key['preco_venda'] != $this->Data['preco_venda']):
+                if($key['peso_bruto'] != ($taxa * $config['cambio_atual']) || $key['preco_venda_ii'] != $config['cambio_atual']):
+                    if(!isset($key['preco_original']) || empty($key['preco_original'])):
+                        $this->Data['preco_original'] = $key['preco_venda'];
+                    else:
+                        $this->Data['preco_original'] = $key['preco_original'];
+                    endif;
+                endif;
+
+                $this->Data['preco_venda_ii'] = $config['cambio_atual'];
+                $this->Data['peso_bruto'] = ($taxa * $config['cambio_atual']);
+
+                if(isset($this->Data['preco_original']) && !empty($this->Data['preco_original'])):
+                    $preco_venda = $this->Data['preco_original'];
+                else:
+                    $preco_venda = $key['preco_original'];
+                endif;
+
+                //$preco_venda = $key['preco_original'] ?? $key['preco_venda'];
+                $this->Data['preco_venda'] = $preco_venda + ($taxa * $config['cambio_atual']);
+
+                if($key['preco_original'] + ($taxa * $config['cambio_atual']) != $old_pricing || $key['likes'] == 1):
                     $this->ID = $key['id'];
+                    $this->Data['likes'] = 0;
+
                     $this->UpdateCambio();
                 else:
                     $this->Result = true;
@@ -41,6 +76,42 @@ class Product{
         else:
             $this->Result = true;
         endif;
+
+        /*unset($this->Data);
+        $this->id_db_settings = strip_tags(trim($id_db_settings));
+        $taxa = (DBKwanzar::CheckConfig($id_db_settings)['cambio_atual'] * 1 / 100);
+
+        $Read = new Read();
+        $Read->ExeRead(self::Entity, "WHERE id_db_settings=:id ", "id={$this->id_db_settings}");
+
+        if($Read->getResult()):
+            foreach ($Read->getResult() as $key):
+                if(!isset($key['peso_bruto']) || empty($key['peso_bruto']) || !isset($key['preco_venda_ii']) || empty($key['preco_venda_ii'])):
+                    if(empty($key['preco_original']) || !isset($key['preco_original'])):
+                        $this->Data['preco_original'] = $key['preco_venda'];
+                    endif;
+                endif;
+
+                $this->Data['preco_venda_ii'] = DBKwanzar::CheckConfig($id_db_settings)['cambio_atual'];
+                $this->Data['peso_bruto'] = ($taxa * DBKwanzar::CheckConfig($id_db_settings)['cambio_atual']);
+
+                if(empty($key['preco_original'])):
+                    $this->Data['preco_venda'] = $key['preco_venda'] + ($taxa * DBKwanzar::CheckConfig($id_db_settings)['cambio_atual']);
+                else:
+                    $this->Data['preco_venda'] = $key['preco_original'] + ($taxa * DBKwanzar::CheckConfig($id_db_settings)['cambio_atual']);
+                endif;
+
+
+                if($this->Data['peso_bruto'] != $key['peso_bruto'] && $this->Data['preco_venda_ii'] != $key['preco_venda_ii']):
+                    $this->ID = $key['id'];
+                    $this->UpdateCambio();
+                else:
+                    $this->Result = true;
+                endif;
+            endforeach;
+        else:
+            $this->Result = true;
+        endif;*/
     }
 
     public function ExeUpdateCambioII($id_db_settings){
@@ -50,15 +121,19 @@ class Product{
 
         if($Read->getResult()):
             foreach ($Read->getResult() as $key):
-                if(!empty($key['custo_compra'])):
-                    $this->Data['preco_venda'] = ($key['custo_compra'] + ($key['custo_compra'] * $key['PorcentagemP']) / 100);
-                else:
-                    $this->Data['preco_venda'] = $key['preco_venda'];
-                endif;
+                $this->Data['preco_venda'] = $key['preco_original'];
 
-                if($key['preco_venda'] != $this->Data['preco_venda']):
-                    $this->ID = $key['id'];
-                    $this->UpdateCambio();
+                //var_dump($key['preco_original']);
+
+                if(!empty($key['preco_original'])):
+                    if($key['likes'] == 0):
+                        $this->Data['likes'] = 1;
+                        $this->ID = $key['id'];
+
+                        $this->UpdateCambio();
+                    else:
+                        $this->Result = true;
+                    endif;
                 else:
                     $this->Result = true;
                 endif;
@@ -318,6 +393,8 @@ class Product{
                     $this->Dados['estoque_minimo'] = Strong::Config($this->IDEmpresa)['estoque_minimo'];
                 endif;
 
+                $this->Dados['preco_original'] = $this->Dados['preco_venda'];
+
                 $this->Create();
             endif;
         endif;
@@ -360,6 +437,8 @@ class Product{
                 $this->Dados['estoque_minimo'] = Strong::Config($this->IDEmpresa)['estoque_minimo'];
             endif;
 
+            $this->Dados['preco_original'] = $this->Dados['preco_venda'];
+            //var_dump($this->Dados['preco_original']);
             $this->Update();
         endif;
     }
@@ -511,6 +590,7 @@ class Product{
         $Dados['desconto'] = $this->Dados['desconto'];
         $Dados['custo_compra'] = $this->Dados['custo_compra'];
         $Dados['PorcentagemP'] = $this->Dados['PorcentagemP'];
+        $Dados['preco_original'] = $this->Dados['preco_original'];
 
         $Update = new Update();
         $Update->ExeUpdate(self::Entity, $Dados, "WHERE id=:J AND id_db_settings=:id", "J={$this->Product}&id={$this->IDEmpresa}");
@@ -843,6 +923,8 @@ class Product{
                         $this->Shut_up['custo_compra'] = $this->Dados['custo_compra'];
                         $this->Shut_up['remarks'] = $this->Dados['remarks'];
                         $this->Shut_up['local_product'] = $this->Dados['local_product'];
+
+                        $this->Dados['preco_original'] = $this->Dados['preco_venda'];
 
                         $this->Shut_up['iva'] = $this->Dados['iva'];
                         $this->Shut_up['id_iva'] = $this->Dados['id_iva'];

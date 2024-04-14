@@ -68,7 +68,7 @@ body{
 }
 
 .img-silvio{
-    max-width: 180px!important;
+    max-width: 160px!important;
     display: block!important;
     max-height: 100px!important;
     margin-bottom: 5px!important;
@@ -135,7 +135,7 @@ body{
 .limpopo-silvio{
     width: 100%;
     height: auto;
-    padding: 2px 35px;
+    padding: 2px;
     box-sizing: border-box;
     margin: 0;
     border-bottom: 3px solid #000!important;
@@ -319,14 +319,13 @@ table{
 
 .total-silvio{
     width: 100%;
-    margin: 5px 0!important;
-    border-top: 2px solid #000000!important;
+    margin: 1px 0!important;
     padding: 0;
 }
 
 .total-silvio p{
     font-weight: bold!important;
-    font-size: 10pt!important;
+    font-size: 8pt!important;
 }
 
 .total-silvio p:nth-last-child(1){

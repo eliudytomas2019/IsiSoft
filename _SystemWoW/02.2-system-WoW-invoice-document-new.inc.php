@@ -54,7 +54,7 @@ $Read = new Read();
 $Read->ExeRead("{$n1}, {$n2}", "WHERE {$n1}.id_db_settings=:i AND {$n1}.status=:st AND  {$n1}.numero=:n AND {$n2}.numero=:n AND {$n2}.status=:st AND {$n2}.id_db_settings=:i ORDER BY {$n1}.id DESC", "i={$id_db_settings}&st={$ttt}&n={$Number}");
 if($Read->getResult()):
     $k = $Read->getResult()[0];
-    POS::Timers($k['numero'], $InvoiceType);
+    //POS::Timers($k['numero'], $InvoiceType);
     ?>
     <div class="header">
         <img src="./uploads/<?php if($k['settings_logotype'] == null || $k['settings_logotype'] == null): echo $Index['logotype']; else: echo $k['settings_logotype']; endif;  ?>" class="img-silvio"/>
